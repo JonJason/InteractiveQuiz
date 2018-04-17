@@ -17,7 +17,6 @@ public class MainApp extends Application {
     public void initRootController(Stage primaryStage) {
         primaryStage.setScene(new Scene(new QuizHomeController().getRoot()));
         primaryStage.show();
-    	
     }
 
     public static void main(String[] args) {
