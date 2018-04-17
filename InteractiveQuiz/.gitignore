@@ -7,3 +7,6 @@
 !/src/main/lib/*.jar
 *.war
 *.ear
+
+# Storage file #
+*.dat
