@@ -1,12 +1,10 @@
 package application.controller;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 
 import application.util.AlertThrower;
 import application.util.Storage;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,31 +17,23 @@ import javafx.scene.control.TextInputDialog;
 public class AdminTopicsTabController extends BaseController {
 	
 	@FXML
-	Button addTopicButton;
+	private Button addTopicButton;
 	
 	@FXML
-	Button editTopicButton;
+	private Button editTopicButton;
 	
 	@FXML
-	Button deleteTopicButton;
+	private Button deleteTopicButton;
 	
 	@FXML
-	ListView<String> topicsListView;
+	private ListView<String> topicsListView;
 	
-	ObservableList<String> topics;
+	private ObservableList<String> topics;
 
 	public AdminTopicsTabController() {
 
 		loadFXML("admintopicstab");
 		
-		try {
-			topics = FXCollections.observableArrayList(Storage.loadTopics());
-			topicsListView.setItems(topics);
-		} catch (ClassNotFoundException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 	}
 	
 	@FXML
@@ -108,6 +98,11 @@ public class AdminTopicsTabController extends BaseController {
 			topics.remove(topicsListView.getSelectionModel().getSelectedIndex());
 			Storage.saveTopics( new ArrayList<String>(topics));
 		}
+	}
+	
+	public void setTopics(ObservableList<String> topics) {
+		this.topics = topics;
+		topicsListView.setItems(this.topics);
 	}
 
 }
