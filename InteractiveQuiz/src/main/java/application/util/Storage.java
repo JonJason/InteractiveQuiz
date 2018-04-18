@@ -14,9 +14,9 @@ import application.model.*;
 
 public class Storage {
 
-	private String questionsFilename = "questions.dat";
+	private static String questionsFilename = "questions.dat";
 	
-	public Storage() {
+	public static void setup() {
 		try {
 			initAllData();
 		} catch (URISyntaxException e) {
@@ -28,7 +28,7 @@ public class Storage {
 		}
 	}
 	
-	private void initAllData() throws URISyntaxException, IOException {
+	private static void initAllData() throws URISyntaxException, IOException {
 		File file = new File(questionsFilename);
 		if (!file.exists()) {
 			file.createNewFile();
@@ -37,7 +37,7 @@ public class Storage {
 		
 	}
 
-	public void write(String name, Object obj) {
+	public static void write(String name, Object obj) {
 
 		try {
 			ObjectOutputStream out = new ObjectOutputStream( new FileOutputStream( name ) );
@@ -49,7 +49,7 @@ public class Storage {
 		}
 	}
 	
-	public Object read(String name) throws FileNotFoundException, IOException, ClassNotFoundException {
+	public static Object read(String name) throws FileNotFoundException, IOException, ClassNotFoundException {
 		Object sc;
         ObjectInputStream in = new ObjectInputStream( new FileInputStream( name ) );
         sc = (Object)in.readObject();
@@ -57,11 +57,11 @@ public class Storage {
 		return sc;
 	}
 	
-	public void saveQuestions(ArrayList<Question> questions) {
+	public static void saveQuestions(ArrayList<Question> questions) {
 		write(questionsFilename, questions);
 	}
 	
-	public ArrayList<Question> loadQuestions() throws FileNotFoundException, IOException, ClassNotFoundException {
+	public static ArrayList<Question> loadQuestions() throws FileNotFoundException, IOException, ClassNotFoundException {
         ArrayList<Question> questions = (ArrayList<Question>) read(questionsFilename);
 		return questions;
 	}

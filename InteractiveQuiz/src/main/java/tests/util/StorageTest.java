@@ -16,12 +16,12 @@ import application.util.Storage;
 class StorageTest {
 	
 	ArrayList<Question> questions;
-	Storage storage = new Storage();
 	int questionSize;
 	
 	@BeforeEach
 	void setUp() throws FileNotFoundException, ClassNotFoundException, IOException {
-		ArrayList<Question> questions = storage.loadQuestions();
+		Storage.setup();
+		ArrayList<Question> questions = Storage.loadQuestions();
 		
 		questionSize = questions.size();
 		
@@ -51,22 +51,22 @@ class StorageTest {
 		question.setCorrectAnswerIndex(1);
 		
 		questions.add(question);
-		storage.saveQuestions(questions);
+		Storage.saveQuestions(questions);
 		
 	}
 	
 	@AfterEach
 	void cleanUp() throws FileNotFoundException, ClassNotFoundException, IOException {
-		ArrayList<Question> questions = storage.loadQuestions();
+		ArrayList<Question> questions = Storage.loadQuestions();
 		questions.remove(questions.size() - 1);
 		questions.remove(questions.size() - 1);
-		storage.saveQuestions(questions);
+		Storage.saveQuestions(questions);
 	}
 
 	@Test
 	void saveAndLoadQuestion() throws FileNotFoundException, ClassNotFoundException, IOException {
 
-		ArrayList<Question> loadedQuestions = storage.loadQuestions();
+		ArrayList<Question> loadedQuestions = Storage.loadQuestions();
 		assertEquals(loadedQuestions.get(0).getQuestionText(), loadedQuestions.get(0).getQuestionText());
 		assertEquals(loadedQuestions.get(1).getQuestionText(), loadedQuestions.get(1).getQuestionText());
 		
