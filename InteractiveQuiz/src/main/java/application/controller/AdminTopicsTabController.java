@@ -59,6 +59,8 @@ public class AdminTopicsTabController extends BaseController {
 			if (!topic.equals("") ) {
 				topics.add(topic);
 				Storage.saveTopics( new ArrayList<String>(topics));
+			} else {
+				AlertThrower.showAlert("Invalid Input", "input was empty, topic wasn't added", null, "warning");
 			}
 		});
 		
