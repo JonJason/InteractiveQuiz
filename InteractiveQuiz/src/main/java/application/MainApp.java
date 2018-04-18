@@ -1,6 +1,7 @@
 package application;
 
 import application.controller.QuizHomeController;
+import application.util.Storage;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -20,6 +21,9 @@ public class MainApp extends Application {
     }
 
     public static void main(String[] args) {
+    	// setup storage
+    	Storage.setup();
+    	
         launch(args);
     }
 }

@@ -15,6 +15,7 @@ import application.model.*;
 public class Storage {
 
 	private static String questionsFilename = "questions.dat";
+	private static String topicsFilename = "topics.dat";
 	
 	public static void setup() {
 		try {
@@ -29,10 +30,16 @@ public class Storage {
 	}
 	
 	private static void initAllData() throws URISyntaxException, IOException {
-		File file = new File(questionsFilename);
-		if (!file.exists()) {
-			file.createNewFile();
+		File questionsFile = new File(questionsFilename);
+		if (!questionsFile.exists()) {
+			questionsFile.createNewFile();
 			write(questionsFilename, new ArrayList<Question>());
+		}
+		
+		File topicsFile = new File(topicsFilename);
+		if (!topicsFile.exists()) {
+			topicsFile.createNewFile();
+			write(topicsFilename, new ArrayList<Question>());
 		}
 		
 	}
@@ -64,5 +71,14 @@ public class Storage {
 	public static ArrayList<Question> loadQuestions() throws FileNotFoundException, IOException, ClassNotFoundException {
         ArrayList<Question> questions = (ArrayList<Question>) read(questionsFilename);
 		return questions;
+	}
+	
+	public static void saveTopics(ArrayList<String> topics) {
+		write(topicsFilename, topics);
+	}
+	
+	public static ArrayList<String> loadTopics() throws FileNotFoundException, IOException, ClassNotFoundException {
+        ArrayList<String> topics = (ArrayList<String>) read(topicsFilename);
+		return topics;
 	}
 }

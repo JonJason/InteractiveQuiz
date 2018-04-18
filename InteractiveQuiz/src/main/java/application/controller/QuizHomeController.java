@@ -23,9 +23,7 @@ public class QuizHomeController extends BaseController {
 	
 	@FXML
 	private void startQuiz(ActionEvent e) {
-		
 		System.out.println("Show the QUIZZZZ!!!!");
-		
 	}
 	
 	@FXML
