@@ -51,6 +51,12 @@ public class Question implements Serializable {
 		this.topics.addAll(topics);
 	}
 
+	public void addTopic(String topic) {
+		if (!topics.contains(topic)) {
+			topics.add(topic);
+		}
+	}
+
 	public void removeTopic(String topic) {
 		topics.remove(topic);
 	}

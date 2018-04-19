@@ -6,6 +6,7 @@ import java.util.Optional;
 import application.model.Question;
 import application.util.AlertThrower;
 import application.util.Storage;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -48,6 +49,13 @@ public class AdminQuestionsTabController extends BaseController {
 		
 		QuestionFormController formController = new QuestionFormController();
 		formController.setTopics(topics);
+		Question newQuestion = new Question();
+		
+		if (topicsComboBox.getSelectionModel().getSelectedItem() != null) {
+			newQuestion.addTopic(topicsComboBox.getSelectionModel().getSelectedItem());
+		}
+		
+		formController.setQuestion(newQuestion);
 		
 		Dialog<Question> dialog = createQuestionDialog(formController, "new");
 		
@@ -55,6 +63,7 @@ public class AdminQuestionsTabController extends BaseController {
 		result.ifPresent(question -> {
 			if (!question.getTitle().equals("")) {
 				questions.add(question);
+				filterQuestion(topicsComboBox.getSelectionModel().getSelectedItem());
 				Storage.saveQuestions(new ArrayList<Question>(questions));
 			} else {
 				AlertThrower.showAlert("Invalid Input", "input was empty", "no topic added", "warning");
@@ -70,7 +79,6 @@ public class AdminQuestionsTabController extends BaseController {
 			return;
 		}
 		
-
 		QuestionFormController formController = new QuestionFormController();
 		formController.setTopics(topics);
 		formController.setQuestion(selectedQuestion);
@@ -80,7 +88,8 @@ public class AdminQuestionsTabController extends BaseController {
 		Optional<Question> result = dialog.showAndWait();
 		result.ifPresent(question -> {
 			if (!question.getTitle().equals("")) {
-				Storage.saveQuestions( new ArrayList<Question>(questions));	
+				filterQuestion(topicsComboBox.getSelectionModel().getSelectedItem());
+				Storage.saveQuestions( new ArrayList<Question>(questions));
 			} else {
 				AlertThrower.showAlert("Invalid Input", "input was empty", "topic wasn't changed", "warning");
 			}
@@ -100,8 +109,14 @@ public class AdminQuestionsTabController extends BaseController {
 		Optional<ButtonType> answer = confirmationAlert.showAndWait();
 		if (answer.get() == ButtonType.OK){
 			questions.remove(selectedQuestion);
+			filterQuestion(topicsComboBox.getSelectionModel().getSelectedItem());
 			Storage.saveQuestions( new ArrayList<Question>(questions));
 		}
+	}
+	
+	@FXML
+	private void onTopicChange(ActionEvent e) {
+		filterQuestion(topicsComboBox.getSelectionModel().getSelectedItem());
 	}
 
 	public void setTopics(ObservableList<String> topics) {
@@ -163,5 +178,25 @@ public class AdminQuestionsTabController extends BaseController {
 		
 		return dialog;
 		
+	}
+	
+	private void filterQuestion(String topic) {
+		System.out.println(topic);
+		System.out.println(questions.size());
+
+		if (topic == null) {
+			questionsListView.setItems(questions);
+			return;
+		}
+
+		ObservableList<Question> subentries = FXCollections.observableArrayList();
+		for (Question question : questions) {
+			
+			if (question.getTopics().contains(topic)) {
+				subentries.add(question);
+			}
+			
+		}
+		questionsListView.setItems(subentries);
 	}
 }
