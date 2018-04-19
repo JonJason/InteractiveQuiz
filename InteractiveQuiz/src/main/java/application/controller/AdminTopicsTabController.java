@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextInputDialog;
@@ -40,17 +41,21 @@ public class AdminTopicsTabController extends BaseController {
 	private void showAddTopicDialog(ActionEvent e) {
 		
 		TextInputDialog dialog = new TextInputDialog();
+		
 		dialog.setTitle("New Topic");
 		dialog.setHeaderText(null);
 		dialog.setGraphic(null);
 		dialog.setContentText("Please enter topic:");
+		ButtonType addButtonType = new ButtonType("Add", ButtonData.OK_DONE);
+		dialog.getDialogPane().getButtonTypes().set(0, addButtonType);
+		
 		Optional<String> result = dialog.showAndWait();
 		result.ifPresent(topic -> {
 			if (!topic.equals("") ) {
 				topics.add(topic);
 				Storage.saveTopics( new ArrayList<String>(topics));
 			} else {
-				AlertThrower.showAlert("Invalid Input", "input was empty, topic wasn't added", null, "warning");
+				AlertThrower.showAlert("Invalid Input", "input was empty", "no topic added", "warning");
 			}
 		});
 		
@@ -60,7 +65,7 @@ public class AdminTopicsTabController extends BaseController {
 	private void showEditTopicDialog(ActionEvent e) {
 		String selectedTopic = topicsListView.getSelectionModel().getSelectedItem();
 		if (selectedTopic == null) {
-			AlertThrower.showAlert("No topic Selected", "Please select a topic that you want to edit", null, "warning");
+			AlertThrower.showAlert("No topic Selected", "No topic Selected", "Please select a topic that you want to edit", "warning");
 			return;
 		}
 		
@@ -78,7 +83,7 @@ public class AdminTopicsTabController extends BaseController {
 					Storage.saveTopics( new ArrayList<String>(topics));	
 				}
 			} else {
-				AlertThrower.showAlert("Invalid Input", "input was empty, topic wasn't changed", null, "warning");
+				AlertThrower.showAlert("Invalid Input", "input was empty", "topic wasn't changed", "warning");
 			}
 		});
 		
@@ -88,14 +93,14 @@ public class AdminTopicsTabController extends BaseController {
 	private void showDeleteConfirmationDialog(ActionEvent e) {
 		String selectedTopic = topicsListView.getSelectionModel().getSelectedItem();
 		if (selectedTopic == null) {
-			AlertThrower.showAlert("No topic Selected", "Please select a topic that you want to delete", null, "warning");
+			AlertThrower.showAlert("No topic Selected", "No topic Selected", "Please select a topic that you want to delete", "warning");
 			return;
 		}
 		
 		Alert confirmationAlert = AlertThrower.createAlert("Delete Confirmation", "Are you sure you want to delete: " + selectedTopic, null, "confirm");
 		Optional<ButtonType> answer = confirmationAlert.showAndWait();
 		if (answer.get() == ButtonType.OK){
-			topics.remove(topicsListView.getSelectionModel().getSelectedIndex());
+			topics.remove(selectedTopic);
 			Storage.saveTopics( new ArrayList<String>(topics));
 		}
 	}

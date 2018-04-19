@@ -20,8 +20,8 @@ class QuestionTest {
 
 	@Test
 	void setQuestionText() {
-		question.setQuestionText("test oy test!");
-		assertEquals(question.getQuestionText(), "test oy test!");
+		question.setText("test oy test!");
+		assertEquals(question.getText(), "test oy test!");
 	}
 
 	@Test

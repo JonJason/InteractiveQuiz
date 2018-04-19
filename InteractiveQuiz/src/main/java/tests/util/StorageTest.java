@@ -27,7 +27,7 @@ class StorageTest {
 		
 		Question question;
 		question = new Question();
-		question.setQuestionText("what?");
+		question.setText("what?");
 		question.setPicture("flower.jpg");
 		question.addTopic("general");
 		question.addTopic("uk");
@@ -40,7 +40,7 @@ class StorageTest {
 		questions.add(question);
 		
 		question = new Question();
-		question.setQuestionText("what the?");
+		question.setText("what the?");
 		question.setPicture("boys.jpg");
 		question.addTopic("not general");
 		question.addTopic("united kingdom");
@@ -67,8 +67,8 @@ class StorageTest {
 	void saveAndLoadQuestion() throws FileNotFoundException, ClassNotFoundException, IOException {
 
 		ArrayList<Question> loadedQuestions = Storage.loadQuestions();
-		assertEquals(loadedQuestions.get(0).getQuestionText(), loadedQuestions.get(0).getQuestionText());
-		assertEquals(loadedQuestions.get(1).getQuestionText(), loadedQuestions.get(1).getQuestionText());
+		assertEquals(loadedQuestions.get(0).getText(), loadedQuestions.get(0).getText());
+		assertEquals(loadedQuestions.get(1).getText(), loadedQuestions.get(1).getText());
 		
 	}
 

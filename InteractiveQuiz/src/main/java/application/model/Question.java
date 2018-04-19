@@ -5,18 +5,27 @@ import java.util.ArrayList;
 
 public class Question implements Serializable {
 
-	private String questionText;
+	private String title;
+	private String text;
 	private String picture;
 	private ArrayList<String> topics = new ArrayList<String>();
 	private ArrayList<String> answers = new ArrayList<String>();
 	private int correctAnswerIndex;
 
-	public String getQuestionText() {
-		return questionText;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setQuestionText(String questionText) {
-		this.questionText = questionText;
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String questionText) {
+		this.text = questionText;
 	}
 
 	public String getPicture() {
