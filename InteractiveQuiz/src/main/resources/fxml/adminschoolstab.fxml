@@ -17,16 +17,16 @@
       <RowConstraints minHeight="-Infinity" prefHeight="300.0" valignment="TOP" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <ListView fx:id="topicsListView" maxHeight="400.0" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0">
+      <ListView fx:id="schoolsListView" maxHeight="400.0" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </ListView>
       <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" spacing="10.0" GridPane.columnIndex="1">
          <children>
-            <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showAddTopicDialog" prefWidth="60.0" text="Add" />
-            <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showEditTopicDialog" prefWidth="60.0" text="Edit" />
-            <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showDeleteTopicDialog" prefWidth="60.0" text="Delete" />
+            <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showAddSchoolDialog" prefWidth="60.0" text="Add" />
+            <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showEditSchoolDialog" prefWidth="60.0" text="Edit" />
+            <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showDeleteSchoolDialog" prefWidth="60.0" text="Delete" />
          </children>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

@@ -10,21 +10,27 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 
 public class AdminHomeController extends BaseController {
-
-	@FXML
-	private Tab topicsTab;
-	
-	@FXML
-	private Tab questionsTab;
 	
 	@FXML
 	private Tab quizTab;
+	
+	@FXML
+	private Tab questionsTab;
 
-	private AdminTopicsTabController topicsController;
-	private AdminQuestionsTabController questionsController;
+	@FXML
+	private Tab topicsTab;
+
+	@FXML
+	private Tab schoolsTab;
+
 	private AdminQuizTabController quizController;
-	protected ObservableList<String> topics;
+	private AdminQuestionsTabController questionsController;
+	private AdminTopicsTabController topicsController;
+	private AdminSchoolsTabController schoolsController;
+	
 	protected ObservableList<Question> questions;
+	protected ObservableList<String> topics;
+	protected ObservableList<String> schools;
 
 	public AdminHomeController() {
 
@@ -33,8 +39,9 @@ public class AdminHomeController extends BaseController {
 		initTabs();
 		
 		try {
-			topics = FXCollections.observableArrayList(Storage.loadTopics());
 			questions = FXCollections.observableArrayList(Storage.loadQuestions());
+			topics = FXCollections.observableArrayList(Storage.loadTopics());
+			schools = FXCollections.observableArrayList(Storage.loadSchools());
 
 			bindData();
 		} catch (ClassNotFoundException | IOException e) {
@@ -44,18 +51,23 @@ public class AdminHomeController extends BaseController {
 	}
 	
 	private void initTabs() {
-		topicsController = new AdminTopicsTabController();
-		questionsController = new AdminQuestionsTabController();
 		quizController = new AdminQuizTabController();
-		
-		topicsTab.setContent(topicsController.getRoot());
-		questionsTab.setContent(questionsController.getRoot());
+		questionsController = new AdminQuestionsTabController();
+		topicsController = new AdminTopicsTabController();
+		schoolsController = new AdminSchoolsTabController();
+
 		quizTab.setContent(quizController.getRoot());
+		questionsTab.setContent(questionsController.getRoot());
+		topicsTab.setContent(topicsController.getRoot());
+		schoolsTab.setContent(schoolsController.getRoot());
 	}
 	
 	private void bindData() {
-		topicsController.setTopics(topics);
-		questionsController.setTopics(topics);
+		quizController.setQuestions(questions);
+		quizController.setTopics(topics);
 		questionsController.setQuestions(questions);
+		questionsController.setTopics(topics);
+		topicsController.setTopics(topics);
+		schoolsController.setSchools(schools);
 	}
 }

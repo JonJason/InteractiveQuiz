@@ -34,7 +34,7 @@ public class QuizHomeController extends BaseController {
         Stage newStage = new Stage();
         newStage.setTitle("Quiz Administrator");
 
-        newStage.setScene(new Scene(new AdminHomeController().getRoot()));
+        newStage.setScene(new Scene(new AdminHomeController().getRoot(), 670, 400));
 
         newStage.initOwner(owner);
         newStage.show();

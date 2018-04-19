@@ -11,6 +11,7 @@
           <Tab fx:id="quizTab" text="Quiz" />
           <Tab fx:id="questionsTab" text="Questions" />
             <Tab fx:id="topicsTab" text="Topics" />
+            <Tab fx:id="schoolsTab" text="Schools" />
         </tabs>
       </TabPane>
    </center>

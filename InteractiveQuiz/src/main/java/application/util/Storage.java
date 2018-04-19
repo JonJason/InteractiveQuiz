@@ -20,6 +20,7 @@ public class Storage {
 
 	private static String questionsFilename = "questions.dat";
 	private static String topicsFilename = "topics.dat";
+	private static String schoolsFilename = "schools.dat";
 	
 	public static void setup() {
 		try {
@@ -44,6 +45,12 @@ public class Storage {
 		if (!topicsFile.exists()) {
 			topicsFile.createNewFile();
 			write(topicsFilename, new ArrayList<Question>());
+		}
+		
+		File schoolsFile = new File(schoolsFilename);
+		if (!schoolsFile.exists()) {
+			schoolsFile.createNewFile();
+			write(schoolsFilename, new ArrayList<Question>());
 		}
 		
 	}
@@ -84,6 +91,15 @@ public class Storage {
 	public static ArrayList<String> loadTopics() throws FileNotFoundException, IOException, ClassNotFoundException {
         ArrayList<String> topics = (ArrayList<String>) read(topicsFilename);
 		return topics;
+	}
+	
+	public static void saveSchools(ArrayList<String> schools) {
+		write(schoolsFilename, schools);
+	}
+	
+	public static ArrayList<String> loadSchools() throws FileNotFoundException, IOException, ClassNotFoundException {
+        ArrayList<String> schools = (ArrayList<String>) read(schoolsFilename);
+		return schools;
 	}
 	
 	public static String storeAndGetImage(File source) throws IOException, URISyntaxException {

@@ -18,15 +18,6 @@ import javafx.scene.control.TextInputDialog;
 public class AdminTopicsTabController extends BaseController {
 	
 	@FXML
-	private Button addTopicButton;
-	
-	@FXML
-	private Button editTopicButton;
-	
-	@FXML
-	private Button deleteTopicButton;
-	
-	@FXML
 	private ListView<String> topicsListView;
 	
 	private ObservableList<String> topics;
