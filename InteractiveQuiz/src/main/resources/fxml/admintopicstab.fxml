@@ -26,7 +26,7 @@
          <children>
             <Button fx:id="addTopicButton" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showAddTopicDialog" prefWidth="60.0" text="Add" />
             <Button fx:id="editTopicButton" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showEditTopicDialog" prefWidth="60.0" text="Edit" />
-            <Button fx:id="deleteTopicButton" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showDeleteConfirmationDialog" prefWidth="60.0" text="Delete" />
+            <Button fx:id="deleteTopicButton" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showDeleteTopicDialog" prefWidth="60.0" text="Delete" />
          </children>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

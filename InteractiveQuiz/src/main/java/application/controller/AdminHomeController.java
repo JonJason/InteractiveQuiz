@@ -2,6 +2,7 @@ package application.controller;
 
 import java.io.IOException;
 
+import application.model.Question;
 import application.util.Storage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,6 +24,7 @@ public class AdminHomeController extends BaseController {
 	private AdminQuestionsTabController questionsController;
 	private AdminQuizTabController quizController;
 	protected ObservableList<String> topics;
+	protected ObservableList<Question> questions;
 
 	public AdminHomeController() {
 
@@ -32,6 +34,7 @@ public class AdminHomeController extends BaseController {
 		
 		try {
 			topics = FXCollections.observableArrayList(Storage.loadTopics());
+			questions = FXCollections.observableArrayList(Storage.loadQuestions());
 
 			bindData();
 		} catch (ClassNotFoundException | IOException e) {
@@ -53,5 +56,6 @@ public class AdminHomeController extends BaseController {
 	private void bindData() {
 		topicsController.setTopics(topics);
 		questionsController.setTopics(topics);
+		questionsController.setQuestions(questions);
 	}
 }

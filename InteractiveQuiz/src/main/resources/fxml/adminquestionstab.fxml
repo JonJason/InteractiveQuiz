@@ -20,7 +20,7 @@
       <RowConstraints minHeight="-Infinity" prefHeight="300.0" valignment="TOP" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <ListView fx:id="questionListView" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+      <ListView fx:id="questionsListView" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
@@ -29,7 +29,7 @@
          <children>
             <Button fx:id="addQuestionButton" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showAddQuestionDialog" prefWidth="60.0" text="Add" />
             <Button fx:id="editQuestionButton" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="60.0" text="Edit" />
-            <Button fx:id="deleteQuestionButton" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="60.0" text="Delete" />
+            <Button fx:id="deleteQuestionButton" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showDeleteQuestionDialog" prefWidth="60.0" text="Delete" />
          </children>
       </VBox>
       <GridPane hgap="5.0">
@@ -46,7 +46,7 @@
          </rowConstraints>
          <children>
             <Label text="Topic :" GridPane.halignment="RIGHT" />
-            <ComboBox fx:id="topicComboBox" prefWidth="150.0" promptText="All" GridPane.columnIndex="1" />
+            <ComboBox fx:id="topicsComboBox" prefWidth="150.0" promptText="All" GridPane.columnIndex="1" />
             <Button fx:id="resetFilterButton" mnemonicParsing="false" onAction="#resetFilter" text="Reset" GridPane.columnIndex="2">
                <GridPane.margin>
                   <Insets />

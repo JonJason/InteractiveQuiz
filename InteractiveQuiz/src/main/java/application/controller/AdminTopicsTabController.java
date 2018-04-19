@@ -90,7 +90,7 @@ public class AdminTopicsTabController extends BaseController {
 	}
 	
 	@FXML
-	private void showDeleteConfirmationDialog(ActionEvent e) {
+	private void showDeleteTopicDialog(ActionEvent e) {
 		String selectedTopic = topicsListView.getSelectionModel().getSelectedItem();
 		if (selectedTopic == null) {
 			AlertThrower.showAlert("No topic Selected", "No topic Selected", "Please select a topic that you want to delete", "warning");
