@@ -70,16 +70,18 @@ public class AdminTopicsTabController extends BaseController {
 		}
 		
 		TextInputDialog dialog = new TextInputDialog(topicsListView.getSelectionModel().getSelectedItem());
-		dialog.setTitle("New Topic");
+		dialog.setTitle("Edit Topic");
 		dialog.setHeaderText(null);
 		dialog.setGraphic(null);
 		dialog.setContentText("Please enter topic:");
+		ButtonType addButtonType = new ButtonType("Edit", ButtonData.OK_DONE);
+		dialog.getDialogPane().getButtonTypes().set(0, addButtonType);
 		
 		Optional<String> result = dialog.showAndWait();
 		result.ifPresent(topic -> {
 			if (!topic.equals("") ) {
-				topics.set(topicsListView.getSelectionModel().getSelectedIndex(), topic);
 				if (!topic.equals(selectedTopic)) {
+					topics.set(topicsListView.getSelectionModel().getSelectedIndex(), topic);
 					Storage.saveTopics( new ArrayList<String>(topics));	
 				}
 			} else {

@@ -10,7 +10,7 @@ public class Question implements Serializable {
 	private String picture;
 	private ArrayList<String> topics = new ArrayList<String>();
 	private ArrayList<String> answers = new ArrayList<String>(4);
-	private int correctAnswerIndex;
+	private int correctAnswerIndex = -1;
 	
 	public Question() {
 		answers.add("");

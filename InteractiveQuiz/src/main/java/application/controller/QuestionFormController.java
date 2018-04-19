@@ -75,7 +75,7 @@ public class QuestionFormController extends BaseController {
 
 	@FXML
 	Button removeTopicButton;
-	
+
 	private Question question;
 	private ObservableList<String> providerTopics;
 	private ObservableList<String> attachedTopics;
@@ -85,16 +85,13 @@ public class QuestionFormController extends BaseController {
 	public QuestionFormController() {
 
 		loadFXML("questionform");
-		
-		question = new Question();
-		attachedTopics = FXCollections.observableArrayList(question.getTopics());
-		attachedTopicsListView.setItems(attachedTopics);
+
 		correctButtons.add(correctAnswerButton1);
 		correctButtons.add(correctAnswerButton2);
 		correctButtons.add(correctAnswerButton3);
 		correctButtons.add(correctAnswerButton4);
 	}
-	
+
 	@FXML
 	private void addTopic(ActionEvent e) {
 		String selectedTopic = providerTopicsListView.getSelectionModel().getSelectedItem();
@@ -102,12 +99,12 @@ public class QuestionFormController extends BaseController {
 			AlertThrower.showAlert("No topic Selected", "No topic Selected", "Please select a topic that you want to add", "warning");
 			return;
 		}
-		
+
 		if (!attachedTopics.contains(selectedTopic)) {
 			attachedTopics.add(selectedTopic);
 		}
 	}
-	
+
 	@FXML
 	private void removeTopic(ActionEvent e) {
 		String selectedTopic = attachedTopicsListView.getSelectionModel().getSelectedItem();
@@ -118,7 +115,7 @@ public class QuestionFormController extends BaseController {
 
 		attachedTopics.remove(selectedTopic);
 	}
-	
+
 	@FXML
 	private void uploadPicture(ActionEvent e) {
         FileChooser chooser = new FileChooser();
@@ -134,7 +131,7 @@ public class QuestionFormController extends BaseController {
 			e1.printStackTrace();
 		}
 	}
-	
+
 	@FXML
 	private void correctButtonPressed(ActionEvent e) {
 		ToggleButton toggleButton = (ToggleButton) e.getSource();
@@ -146,28 +143,28 @@ public class QuestionFormController extends BaseController {
 			});
 		};
 	}
-	
+
 	public void setTopics(ObservableList<String> topics) {
 		providerTopics = topics;
 		providerTopicsListView.setItems(providerTopics);
 	}
-	
-	public void parseData() {
+
+	private void parseData() {
 
 		// title
 		if (!titleTextField.getText().equals("")) {
 			question.setTitle(titleTextField.getText());
 		}
-		
+
 		// text
 		if (!textTextArea.getText().equals("")) {
 			question.setText(textTextArea.getText());
 		}
-		
+
 		if (imgPath != null) {
-			question.setPicture(imgPath);	
+			question.setPicture(imgPath);
 		}
-		
+
 		// answers
 		question.setAnswer(0, answerTextField1.getText());
 		question.setAnswer(1, answerTextField2.getText());
@@ -182,6 +179,42 @@ public class QuestionFormController extends BaseController {
 		}
 		question.setCorrectAnswerIndex(correctIndex);
 		question.setTopics(new ArrayList<String>(attachedTopics));
+	}
+
+	private void serializeData() {
+
+		// title
+		if (question.getTitle() != null) {
+			titleTextField.setText(question.getTitle());
+		}
+
+		// text
+		if (question.getText() != null) {
+			textTextArea.setText(question.getText());
+		}
+
+		if (question.getPicture() != null) {
+			imgPath = question.getPicture();
+            pictureImageView.setImage(new Image(imgPath));
+		}
+
+		// answers
+		answerTextField1.setText(question.getAnswer(0));
+		answerTextField2.setText(question.getAnswer(1));
+		answerTextField3.setText(question.getAnswer(2));
+		answerTextField4.setText(question.getAnswer(3));
+
+		if (question.getCorrectAnswerIndex() != -1) {
+			correctButtons.get(question.getCorrectAnswerIndex()).setSelected(true);
+		}
+	}
+
+	public void setQuestion(Question question) {
+		this.question = question;
+		attachedTopics = FXCollections.observableArrayList(this.question.getTopics());
+		attachedTopicsListView.setItems(attachedTopics);
+		
+		serializeData();
 	}
 
 	public Question getQuestion() {

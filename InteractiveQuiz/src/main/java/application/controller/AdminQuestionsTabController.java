@@ -49,28 +49,43 @@ public class AdminQuestionsTabController extends BaseController {
 		QuestionFormController formController = new QuestionFormController();
 		formController.setTopics(topics);
 		
-		Dialog<Question> dialog = new Dialog<Question>();
-		
-		dialog.setTitle("New Question");
-		dialog.setHeaderText(null);
-		dialog.setGraphic(null);
-		dialog.getDialogPane().setContent(formController.getRoot());
-		ButtonType addButtonType = new ButtonType("Add", ButtonData.OK_DONE);
-		dialog.getDialogPane().getButtonTypes().addAll(addButtonType, ButtonType.CANCEL);
-		
-		// Convert the result to a username-password-pair when the login button is clicked.
-		dialog.setResultConverter(dialogButton -> {
-		    if (dialogButton == addButtonType) {
-		        return formController.getQuestion();
-		    }
-		    return null;
-		});
+		Dialog<Question> dialog = createQuestionDialog(formController, "new");
 		
 		Optional<Question> result = dialog.showAndWait();
 		result.ifPresent(question -> {
-			questions.add(question);
-			Storage.saveQuestions(new ArrayList<Question>(questions));
+			if (!question.getTitle().equals("")) {
+				questions.add(question);
+				Storage.saveQuestions(new ArrayList<Question>(questions));
+			} else {
+				AlertThrower.showAlert("Invalid Input", "input was empty", "no topic added", "warning");
+			}
 		});
+	}
+
+	@FXML
+	private void showEditQuestionDialog(ActionEvent e) {
+		Question selectedQuestion = questionsListView.getSelectionModel().getSelectedItem();
+		if (selectedQuestion == null) {
+			AlertThrower.showAlert("No topic Selected", "No topic Selected", "Please select a topic that you want to edit", "warning");
+			return;
+		}
+		
+
+		QuestionFormController formController = new QuestionFormController();
+		formController.setTopics(topics);
+		formController.setQuestion(selectedQuestion);
+		
+		Dialog<Question> dialog = createQuestionDialog(formController, "edit");
+		
+		Optional<Question> result = dialog.showAndWait();
+		result.ifPresent(question -> {
+			if (!question.getTitle().equals("")) {
+				Storage.saveQuestions( new ArrayList<Question>(questions));	
+			} else {
+				AlertThrower.showAlert("Invalid Input", "input was empty", "topic wasn't changed", "warning");
+			}
+		});
+		
 	}
 	
 	@FXML
@@ -110,5 +125,43 @@ public class AdminQuestionsTabController extends BaseController {
 		        }
 		    }
 		});
+	}
+	
+	public Dialog<Question> createQuestionDialog(QuestionFormController formController, String type) {
+		
+		Dialog<Question> dialog = new Dialog<Question>();
+		
+		String okText = "New";
+		
+		switch (type) {
+		case("new"):
+			okText = "New";
+			dialog.setTitle("New Question");
+			break;
+		
+		case("edit"):
+			okText = "Edit";
+			dialog.setTitle("Edit Question");
+			break;
+			
+		default:
+		}
+		
+		ButtonType okButtonType = new ButtonType(okText, ButtonData.OK_DONE);
+		dialog.setHeaderText(null);
+		dialog.setGraphic(null);
+		dialog.getDialogPane().setContent(formController.getRoot());
+		dialog.getDialogPane().getButtonTypes().addAll(okButtonType, ButtonType.CANCEL);
+		
+		// Convert the result to a username-password-pair when the login button is clicked.
+		dialog.setResultConverter(dialogButton -> {
+			if (dialogButton == okButtonType) {
+				return formController.getQuestion();
+			}
+		    return null;
+		});
+		
+		return dialog;
+		
 	}
 }
