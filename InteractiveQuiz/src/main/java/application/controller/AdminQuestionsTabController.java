@@ -18,30 +18,20 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.layout.GridPane;
 
 public class AdminQuestionsTabController extends BaseController {
-
-	@FXML
-	private ComboBox<String> topicsComboBox;
-	
-	@FXML
-	private ListView<Question> questionsListView;
-	
-	@FXML
-	private Button resetFilterButton;
 	
 	private ObservableList<String> topics;
 	private ObservableList<Question> questions;
+	final private QuestionsListWidgetController questionsListWidgetController;
 
 	public AdminQuestionsTabController() {
 
 		loadFXML("adminquestionstab");
-
-	}
-
-	@FXML
-	private void resetFilter(ActionEvent e) {
-		topicsComboBox.setValue(null);
+		
+		questionsListWidgetController = new QuestionsListWidgetController();
+		((GridPane) this.getRoot()).add(questionsListWidgetController.getRoot(), 0, 0);
 	}
 	
 	@FXML
@@ -51,8 +41,8 @@ public class AdminQuestionsTabController extends BaseController {
 		formController.setTopics(topics);
 		Question newQuestion = new Question();
 		
-		if (topicsComboBox.getSelectionModel().getSelectedItem() != null) {
-			newQuestion.addTopic(topicsComboBox.getSelectionModel().getSelectedItem());
+		if (questionsListWidgetController.getSelectedTopic() != null) {
+			newQuestion.addTopic(questionsListWidgetController.getSelectedTopic());
 		}
 		
 		formController.setQuestion(newQuestion);
@@ -63,7 +53,7 @@ public class AdminQuestionsTabController extends BaseController {
 		result.ifPresent(question -> {
 			if (!question.getTitle().equals("")) {
 				questions.add(question);
-				filterQuestion(topicsComboBox.getSelectionModel().getSelectedItem());
+				questionsListWidgetController.updateFilteredQuestions();
 				Storage.saveQuestions(new ArrayList<Question>(questions));
 			} else {
 				AlertThrower.showAlert("Invalid Input", "input was empty", "no topic added", "warning");
@@ -73,7 +63,7 @@ public class AdminQuestionsTabController extends BaseController {
 
 	@FXML
 	private void showEditQuestionDialog(ActionEvent e) {
-		Question selectedQuestion = questionsListView.getSelectionModel().getSelectedItem();
+		Question selectedQuestion = questionsListWidgetController.getSelectedQuestion();
 		if (selectedQuestion == null) {
 			AlertThrower.showAlert("No topic Selected", "No topic Selected", "Please select a topic that you want to edit", "warning");
 			return;
@@ -88,7 +78,7 @@ public class AdminQuestionsTabController extends BaseController {
 		Optional<Question> result = dialog.showAndWait();
 		result.ifPresent(question -> {
 			if (!question.getTitle().equals("")) {
-				filterQuestion(topicsComboBox.getSelectionModel().getSelectedItem());
+				questionsListWidgetController.updateFilteredQuestions();
 				Storage.saveQuestions( new ArrayList<Question>(questions));
 			} else {
 				AlertThrower.showAlert("Invalid Input", "input was empty", "topic wasn't changed", "warning");
@@ -99,7 +89,7 @@ public class AdminQuestionsTabController extends BaseController {
 	
 	@FXML
 	private void showDeleteQuestionDialog(ActionEvent e) {
-		Question selectedQuestion = questionsListView.getSelectionModel().getSelectedItem();
+		Question selectedQuestion = questionsListWidgetController.getSelectedQuestion();
 		if (selectedQuestion == null) {
 			AlertThrower.showAlert("No question Selected", "No question Selected", "Please select a question that you want to delete", "warning");
 			return;
@@ -109,37 +99,19 @@ public class AdminQuestionsTabController extends BaseController {
 		Optional<ButtonType> answer = confirmationAlert.showAndWait();
 		if (answer.get() == ButtonType.OK){
 			questions.remove(selectedQuestion);
-			filterQuestion(topicsComboBox.getSelectionModel().getSelectedItem());
+			questionsListWidgetController.updateFilteredQuestions();
 			Storage.saveQuestions( new ArrayList<Question>(questions));
 		}
-	}
-	
-	@FXML
-	private void onTopicChange(ActionEvent e) {
-		filterQuestion(topicsComboBox.getSelectionModel().getSelectedItem());
 	}
 
 	public void setTopics(ObservableList<String> topics) {
 		this.topics = topics;
-		topicsComboBox.setItems(this.topics);
+		questionsListWidgetController.setTopics(this.topics);
 	}
 	
 	public void setQuestions(ObservableList<Question> questions) {
 		this.questions = questions;
-		questionsListView.setItems(this.questions);
-		
-		questionsListView.setCellFactory(param -> new ListCell<Question>() {
-		    @Override
-		    protected void updateItem(Question question, boolean empty) {
-		        super.updateItem(question, empty);
-
-		        if (empty || question == null || question.getTitle() == null) {
-		            setText(null);
-		        } else {
-		            setText(question.getTitle());
-		        }
-		    }
-		});
+		questionsListWidgetController.setQuestions(this.questions);
 	}
 	
 	public Dialog<Question> createQuestionDialog(QuestionFormController formController, String type) {
@@ -178,25 +150,5 @@ public class AdminQuestionsTabController extends BaseController {
 		
 		return dialog;
 		
-	}
-	
-	private void filterQuestion(String topic) {
-		System.out.println(topic);
-		System.out.println(questions.size());
-
-		if (topic == null) {
-			questionsListView.setItems(questions);
-			return;
-		}
-
-		ObservableList<Question> subentries = FXCollections.observableArrayList();
-		for (Question question : questions) {
-			
-			if (question.getTopics().contains(topic)) {
-				subentries.add(question);
-			}
-			
-		}
-		questionsListView.setItems(subentries);
 	}
 }
