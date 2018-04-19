@@ -48,6 +48,7 @@ public class Question implements Serializable {
 	}
 
 	public void setTopics(ArrayList<String> topics) {
+		this.topics.clear();
 		this.topics.addAll(topics);
 	}
 
