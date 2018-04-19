@@ -32,34 +32,38 @@ class QuestionTest {
 
 	@Test
 	void addTopics() {
-		question.addTopic("bro");
-		question.addTopic("sis");
-		ArrayList<String> topics = question.getTopics();
-		assertFalse(topics.isEmpty());
-		assertTrue(topics.contains("bro"));
-		assertTrue(topics.contains("bro"));
-		assertEquals(topics.get(1), "sis");
-		assertEquals(topics.size(), 2);
+		ArrayList<String> topics = new ArrayList<String>(); 
+		topics.add("bro");
+		topics.add("sis");
+		question.setTopics(topics);
+		ArrayList<String> currentTopics = question.getTopics();
+		assertFalse(currentTopics.isEmpty());
+		assertTrue(currentTopics.contains("bro"));
+		assertTrue(currentTopics.contains("bro"));
+		assertEquals(currentTopics.get(1), "sis");
+		assertEquals(currentTopics.size(), 2);
 	}
 
 	@Test
 	void addAnswers() {
-		question.addAnswer("bro");
-		question.addAnswer("sis");
+		question.setAnswer(0, "bro");
+		question.setAnswer(1, "sis");
+		question.setAnswer(2, "yow");
+		question.setAnswer(3, "dude");
 		ArrayList<String> answers = question.getAnswers();
 		assertFalse(answers.isEmpty());
 		assertTrue(answers.contains("bro"));
 		assertTrue(answers.contains("bro"));
 		assertEquals(answers.get(1), "sis");
-		assertEquals(answers.size(), 2);
+		assertEquals(answers.size(), 4);
 	}
 
 	@Test
 	void setCorrectAnswer() {
-		question.addAnswer("bro");
-		question.addAnswer("sis");
-		question.addAnswer("yow");
-		question.addAnswer("dude");
+		question.setAnswer(0, "bro");
+		question.setAnswer(1, "sis");
+		question.setAnswer(2, "yow");
+		question.setAnswer(3, "dude");
 		question.setCorrectAnswerIndex(3);
 		assertEquals(question.getCorrectAnswerIndex(), 3);
 		assertEquals(question.getAnswer(question.getCorrectAnswerIndex()), "dude");

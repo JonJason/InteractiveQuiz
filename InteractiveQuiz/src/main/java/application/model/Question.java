@@ -9,8 +9,15 @@ public class Question implements Serializable {
 	private String text;
 	private String picture;
 	private ArrayList<String> topics = new ArrayList<String>();
-	private ArrayList<String> answers = new ArrayList<String>();
+	private ArrayList<String> answers = new ArrayList<String>(4);
 	private int correctAnswerIndex;
+	
+	public Question() {
+		answers.add("");
+		answers.add("");
+		answers.add("");
+		answers.add("");
+	}
 
 	public String getTitle() {
 		return title;
@@ -39,19 +46,23 @@ public class Question implements Serializable {
 	public ArrayList<String> getTopics() {
 		return topics;
 	}
-	
-	public void addTopic(String topic) {
-		topics.add(topic);
+
+	public void setTopics(ArrayList<String> topics) {
+		this.topics.addAll(topics);
+	}
+
+	public void removeTopic(String topic) {
+		topics.remove(topic);
 	}
 
 	public ArrayList<String> getAnswers() {
 		return answers;
 	}
-	
-	public void addAnswer(String answer) {
-		answers.add(answer);
+
+	public void setAnswer(int index, String answer) {
+		answers.set(index, answer);
 	}
-	
+
 	public String getAnswer(int index) {
 		return answers.get(index);
 	}
@@ -62,5 +73,15 @@ public class Question implements Serializable {
 
 	public void setCorrectAnswerIndex(int correctAnswerIndex) {
 		this.correctAnswerIndex = correctAnswerIndex;
+	}
+
+	public String toString() {
+		return getClass().getName() + "[" +
+		"title=" + title + ", " +
+		"text=" + text + ", " +
+		"picture=" + picture + ", " +
+		"topics=" + topics + ", " +
+		"answers=" + answers + ", " +
+		"correctAnswerIndex=" + correctAnswerIndex + "]";
 	}
 }

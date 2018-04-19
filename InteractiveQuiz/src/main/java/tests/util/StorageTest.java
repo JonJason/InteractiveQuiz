@@ -29,12 +29,14 @@ class StorageTest {
 		question = new Question();
 		question.setText("what?");
 		question.setPicture("flower.jpg");
-		question.addTopic("general");
-		question.addTopic("uk");
-		question.addAnswer("a");
-		question.addAnswer("b");
-		question.addAnswer("c");
-		question.addAnswer("d");
+		ArrayList<String> topics = new ArrayList<String>(); 
+		topics.add("general");
+		topics.add("uk");
+		question.setTopics(topics);
+		question.setAnswer(0, "a");
+		question.setAnswer(1, "b");
+		question.setAnswer(2, "c");
+		question.setAnswer(3, "d");
 		question.setCorrectAnswerIndex(3);
 		
 		questions.add(question);
@@ -42,12 +44,14 @@ class StorageTest {
 		question = new Question();
 		question.setText("what the?");
 		question.setPicture("boys.jpg");
-		question.addTopic("not general");
-		question.addTopic("united kingdom");
-		question.addAnswer("e");
-		question.addAnswer("f");
-		question.addAnswer("g");
-		question.addAnswer("h");
+		topics = new ArrayList<String>(); 
+		topics.add("not general");
+		topics.add("united kingdom");
+		question.setTopics(topics);
+		question.setAnswer(0, "e");
+		question.setAnswer(1, "f");
+		question.setAnswer(2, "g");
+		question.setAnswer(3, "h");
 		question.setCorrectAnswerIndex(1);
 		
 		questions.add(question);

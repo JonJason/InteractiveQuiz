@@ -8,9 +8,13 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import application.model.*;
+import javafx.scene.image.Image;
 
 public class Storage {
 
@@ -80,5 +84,24 @@ public class Storage {
 	public static ArrayList<String> loadTopics() throws FileNotFoundException, IOException, ClassNotFoundException {
         ArrayList<String> topics = (ArrayList<String>) read(topicsFilename);
 		return topics;
+	}
+	
+	public static String storeAndGetImage(File source) throws IOException, URISyntaxException {
+		File folder = new File(Storage.class.getResource("/img").toURI());
+		
+		String filename = source.getName();
+		Path dest = Paths.get(folder.toPath().toString(), filename);
+		String extension = filename.substring(filename.lastIndexOf("."), filename.length());
+		String name = filename.substring(0, filename.lastIndexOf("."));
+		
+		int i = 0;
+		while (new File(dest.toString()).exists()) {
+			dest = Paths.get(folder.toPath().toString(), name + "(" + Integer.toString(i) + ")" + extension);
+			i++;
+		}
+		Files.copy(source.toPath(), dest);
+		return dest.toString().substring(
+				dest.toString().lastIndexOf("\\img\\"), 
+				dest.toString().length());
 	}
 }
