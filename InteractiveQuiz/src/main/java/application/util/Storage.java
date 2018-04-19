@@ -18,6 +18,7 @@ import javafx.scene.image.Image;
 
 public class Storage {
 
+	private static String quizFilename = "quiz.dat";
 	private static String questionsFilename = "questions.dat";
 	private static String topicsFilename = "topics.dat";
 	private static String schoolsFilename = "schools.dat";
@@ -35,6 +36,12 @@ public class Storage {
 	}
 	
 	private static void initAllData() throws URISyntaxException, IOException {
+		File quizFile = new File(quizFilename);
+		if (!quizFile.exists()) {
+			quizFile.createNewFile();
+			write(quizFilename, new Quiz());
+		}
+		
 		File questionsFile = new File(questionsFilename);
 		if (!questionsFile.exists()) {
 			questionsFile.createNewFile();
@@ -44,13 +51,13 @@ public class Storage {
 		File topicsFile = new File(topicsFilename);
 		if (!topicsFile.exists()) {
 			topicsFile.createNewFile();
-			write(topicsFilename, new ArrayList<Question>());
+			write(topicsFilename, new ArrayList<String>());
 		}
 		
 		File schoolsFile = new File(schoolsFilename);
 		if (!schoolsFile.exists()) {
 			schoolsFile.createNewFile();
-			write(schoolsFilename, new ArrayList<Question>());
+			write(schoolsFilename, new ArrayList<String>());
 		}
 		
 	}
@@ -73,6 +80,15 @@ public class Storage {
         sc = (Object)in.readObject();
         in.close();
 		return sc;
+	}
+	
+	public static void saveQuiz(Quiz quiz) {
+		write(quizFilename, quiz);
+	}
+	
+	public static Quiz loadQuiz() throws FileNotFoundException, ClassNotFoundException, IOException {
+        Quiz quiz = (Quiz) read(quizFilename);
+		return quiz;
 	}
 	
 	public static void saveQuestions(ArrayList<Question> questions) {

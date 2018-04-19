@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" vgap="5.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141">
+<GridPane hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" vgap="5.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
     <ColumnConstraints hgrow="SOMETIMES" />
@@ -68,7 +68,7 @@
             </ImageView>
             <VBox GridPane.columnIndex="1">
                <children>
-                  <Button fx:id="uploadButton" mnemonicParsing="false" onAction="#uploadPicture" text="Upload" />
+                  <Button mnemonicParsing="false" onAction="#uploadPicture" text="Upload" />
                   <Label fx:id="pictureLabel" />
                </children>
                <padding>
@@ -120,8 +120,8 @@
          <children>
             <ListView fx:id="providerTopicsListView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="100.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
             <ListView fx:id="attachedTopicsListView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <Button fx:id="addTopicButton" mnemonicParsing="false" onAction="#addTopic" text="Add Topic" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-            <Button fx:id="removeTopicButton" mnemonicParsing="false" onAction="#removeTopic" text="Remove Topic" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onAction="#addTopic" text="Add Topic" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onAction="#removeTopic" text="Remove Topic" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
             <Label text="Provider" GridPane.halignment="CENTER" />
             <Label fx:id="topicAttachedListView" text="Attached" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
          </children>

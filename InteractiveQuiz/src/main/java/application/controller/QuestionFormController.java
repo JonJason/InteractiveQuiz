@@ -35,9 +35,6 @@ public class QuestionFormController extends BaseController {
 	ImageView pictureImageView;
 
 	@FXML
-	Button uploadButton;
-
-	@FXML
 	Label pictureLabel;
 
 	@FXML
@@ -70,12 +67,6 @@ public class QuestionFormController extends BaseController {
 	@FXML
 	ListView<String> attachedTopicsListView;
 
-	@FXML
-	Button addTopicButton;
-
-	@FXML
-	Button removeTopicButton;
-
 	private Question question;
 	private ObservableList<String> providerTopics;
 	private ObservableList<String> attachedTopics;
@@ -96,7 +87,8 @@ public class QuestionFormController extends BaseController {
 	private void addTopic(ActionEvent e) {
 		String selectedTopic = providerTopicsListView.getSelectionModel().getSelectedItem();
 		if (selectedTopic == null) {
-			AlertThrower.showAlert("No topic Selected", "No topic Selected", "Please select a topic that you want to add", "warning");
+			AlertThrower.showAlert("No topic Selected", "No topic Selected", 
+					"Please select a topic that you want to add", "warning");
 			return;
 		}
 
@@ -109,7 +101,8 @@ public class QuestionFormController extends BaseController {
 	private void removeTopic(ActionEvent e) {
 		String selectedTopic = attachedTopicsListView.getSelectionModel().getSelectedItem();
 		if (selectedTopic == null) {
-			AlertThrower.showAlert("No topic Selected", "No topic Selected", "Please select a topic that you want to add", "warning");
+			AlertThrower.showAlert("No topic Selected", "No topic Selected", 
+					"Please select a topic that you want to remove", "warning");
 			return;
 		}
 
@@ -142,11 +135,6 @@ public class QuestionFormController extends BaseController {
 				}
 			});
 		};
-	}
-
-	public void setTopics(ObservableList<String> topics) {
-		providerTopics = topics;
-		providerTopicsListView.setItems(providerTopics);
 	}
 
 	private void parseData() {
@@ -204,15 +192,23 @@ public class QuestionFormController extends BaseController {
 		answerTextField3.setText(question.getAnswer(2));
 		answerTextField4.setText(question.getAnswer(3));
 
+		// correct answer index
 		if (question.getCorrectAnswerIndex() != -1) {
 			correctButtons.get(question.getCorrectAnswerIndex()).setSelected(true);
 		}
+		
+		// topics
+		attachedTopics = FXCollections.observableArrayList(this.question.getTopics());
+		attachedTopicsListView.setItems(attachedTopics);
+	}
+
+	public void setTopics(ObservableList<String> topics) {
+		providerTopics = topics;
+		providerTopicsListView.setItems(providerTopics);
 	}
 
 	public void setQuestion(Question question) {
 		this.question = question;
-		attachedTopics = FXCollections.observableArrayList(this.question.getTopics());
-		attachedTopicsListView.setItems(attachedTopics);
 		
 		serializeData();
 	}

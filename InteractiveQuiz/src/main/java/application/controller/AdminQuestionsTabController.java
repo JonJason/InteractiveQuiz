@@ -6,17 +6,12 @@ import java.util.Optional;
 import application.model.Question;
 import application.util.AlertThrower;
 import application.util.Storage;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.GridPane;
 
@@ -140,7 +135,6 @@ public class AdminQuestionsTabController extends BaseController {
 		dialog.getDialogPane().setContent(formController.getRoot());
 		dialog.getDialogPane().getButtonTypes().addAll(okButtonType, ButtonType.CANCEL);
 		
-		// Convert the result to a username-password-pair when the login button is clicked.
 		dialog.setResultConverter(dialogButton -> {
 			if (dialogButton == okButtonType) {
 				return formController.getQuestion();

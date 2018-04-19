@@ -3,6 +3,7 @@ package application.controller;
 import java.io.IOException;
 
 import application.model.Question;
+import application.model.Quiz;
 import application.util.Storage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,10 +28,11 @@ public class AdminHomeController extends BaseController {
 	private AdminQuestionsTabController questionsController;
 	private AdminTopicsTabController topicsController;
 	private AdminSchoolsTabController schoolsController;
-	
-	protected ObservableList<Question> questions;
-	protected ObservableList<String> topics;
-	protected ObservableList<String> schools;
+
+	private Quiz quiz;
+	private ObservableList<Question> questions;
+	private ObservableList<String> topics;
+	private ObservableList<String> schools;
 
 	public AdminHomeController() {
 
@@ -39,6 +41,7 @@ public class AdminHomeController extends BaseController {
 		initTabs();
 		
 		try {
+			quiz = Storage.loadQuiz();
 			questions = FXCollections.observableArrayList(Storage.loadQuestions());
 			topics = FXCollections.observableArrayList(Storage.loadTopics());
 			schools = FXCollections.observableArrayList(Storage.loadSchools());
@@ -63,11 +66,18 @@ public class AdminHomeController extends BaseController {
 	}
 	
 	private void bindData() {
+		
+		quizController.setQuiz(quiz);
 		quizController.setQuestions(questions);
 		quizController.setTopics(topics);
+		quizController.setSchools(schools);
+		
 		questionsController.setQuestions(questions);
 		questionsController.setTopics(topics);
+		
 		topicsController.setTopics(topics);
+		
 		schoolsController.setSchools(schools);
+		
 	}
 }
