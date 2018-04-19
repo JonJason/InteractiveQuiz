@@ -17,6 +17,7 @@ public class MainApp extends Application {
     
     public void initRootController(Stage primaryStage) {
         primaryStage.setScene(new Scene(new QuizHomeController().getRoot()));
+        primaryStage.getScene().getStylesheets().add(getClass().getResource("/style/MainScene.css").toExternalForm());
         primaryStage.show();
     }
 
