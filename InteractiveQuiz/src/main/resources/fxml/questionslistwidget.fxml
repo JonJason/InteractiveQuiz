@@ -15,7 +15,7 @@
    </columnConstraints>
    <rowConstraints>
       <RowConstraints valignment="TOP" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="-Infinity" prefHeight="300.0" valignment="TOP" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="-Infinity" prefHeight="260.0" valignment="TOP" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
       <ListView fx:id="questionsListView" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">

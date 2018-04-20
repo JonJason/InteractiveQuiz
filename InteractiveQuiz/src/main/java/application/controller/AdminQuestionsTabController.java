@@ -46,7 +46,7 @@ public class AdminQuestionsTabController extends BaseController {
 		
 		Optional<Question> result = dialog.showAndWait();
 		result.ifPresent(question -> {
-			if (!question.getTitle().equals("")) {
+			if (!question.getText().equals("")) {
 				questions.add(question);
 				questionsListWidgetController.updateFilteredQuestions();
 				Storage.saveQuestions(new ArrayList<Question>(questions));
@@ -72,7 +72,7 @@ public class AdminQuestionsTabController extends BaseController {
 		
 		Optional<Question> result = dialog.showAndWait();
 		result.ifPresent(question -> {
-			if (!question.getTitle().equals("")) {
+			if (!question.getText().equals("")) {
 				questionsListWidgetController.updateFilteredQuestions();
 				Storage.saveQuestions( new ArrayList<Question>(questions));
 			} else {
@@ -90,7 +90,7 @@ public class AdminQuestionsTabController extends BaseController {
 			return;
 		}
 		
-		Alert confirmationAlert = AlertThrower.createAlert("Delete Confirmation", "Are you sure you want to delete: " + selectedQuestion.getTitle(), null, "confirm");
+		Alert confirmationAlert = AlertThrower.createAlert("Delete Confirmation", "Are you sure you want to delete: " + selectedQuestion.getText(), null, "confirm");
 		Optional<ButtonType> answer = confirmationAlert.showAndWait();
 		if (answer.get() == ButtonType.OK){
 			questions.remove(selectedQuestion);

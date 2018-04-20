@@ -160,10 +160,10 @@ public class AdminQuizSetupController extends BaseController {
 		    protected void updateItem(Question question, boolean empty) {
 		        super.updateItem(question, empty);
 
-		        if (empty || question == null || question.getTitle() == null) {
+		        if (empty || question == null || question.getText() == null) {
 		            setText(null);
 		        } else {
-		            setText(question.getTitle());
+		            setText(question.getText());
 		        }
 		    }
 		});

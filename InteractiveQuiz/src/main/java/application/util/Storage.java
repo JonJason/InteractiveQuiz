@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import application.model.*;
 import javafx.scene.image.Image;
@@ -22,6 +23,7 @@ public class Storage {
 	private static String questionsFilename = "questions.dat";
 	private static String topicsFilename = "topics.dat";
 	private static String schoolsFilename = "schools.dat";
+	private static String statisticsFilename = "statistics.dat";
 	
 	public static void setup() {
 		try {
@@ -58,6 +60,12 @@ public class Storage {
 		if (!schoolsFile.exists()) {
 			schoolsFile.createNewFile();
 			write(schoolsFilename, new ArrayList<String>());
+		}
+		
+		File statisticsFile = new File(statisticsFilename);
+		if (!statisticsFile.exists()) {
+			statisticsFile.createNewFile();
+			write(statisticsFilename, new HashMap<String, HashMap<String, Statistic>>());
 		}
 		
 	}
@@ -118,6 +126,37 @@ public class Storage {
 		return schools;
 	}
 	
+	public static void saveStatistic(Statistic s) {
+		try {
+			HashMap<String, HashMap<String, Statistic>> statistics = loadStatistics();
+			if (statistics.get(s.getQuizName()) == null) {
+				HashMap<String, Statistic> quizStats = new HashMap<String, Statistic>();
+				quizStats.put(s.getSchool(), s);
+				statistics.put(s.getQuizName(), quizStats);
+			}
+			
+			statistics.get(s.getQuizName()).put(s.getSchool(), s);
+			
+			write(statisticsFilename, statistics);
+			
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static Statistic loadStatistic(String quizName, String school) throws FileNotFoundException, ClassNotFoundException, IOException {
+		HashMap<String, HashMap<String, Statistic>> statistics = loadStatistics();
+		if (statistics.get(quizName) == null || statistics.get(quizName).get(school) == null) {
+			return new Statistic(quizName, school);
+		}
+		return statistics.get(quizName).get(school);
+	}
+	
+	public static HashMap<String, HashMap<String, Statistic>> loadStatistics() throws FileNotFoundException, IOException, ClassNotFoundException {
+		return (HashMap<String, HashMap<String, Statistic>>) read(statisticsFilename);
+	}
+	
 	public static String storeAndGetImage(File source) throws IOException, URISyntaxException {
 		File folder = new File(Storage.class.getResource("/img").toURI());
 		
@@ -127,13 +166,13 @@ public class Storage {
 		String name = filename.substring(0, filename.lastIndexOf("."));
 		
 		int i = 0;
+		String finalName = name;
 		while (new File(dest.toString()).exists()) {
-			dest = Paths.get(folder.toPath().toString(), name + "(" + Integer.toString(i) + ")" + extension);
+			finalName = name + "(" + Integer.toString(i) + ")";
+			dest = Paths.get(folder.toPath().toString(), finalName + extension);
 			i++;
 		}
 		Files.copy(source.toPath(), dest);
-		return dest.toString().substring(
-				dest.toString().lastIndexOf("\\img\\"), 
-				dest.toString().length());
+		return Storage.class.getResource("/img/" + finalName + extension).toString();
 	}
 }

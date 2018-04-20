@@ -5,10 +5,16 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Quiz implements Serializable  {
+	
 	private Date date;
 	private String name;
-	private ArrayList<Question> questions = new ArrayList<Question>();
-	private ArrayList<String> schools = new ArrayList<String>();
+	final private ArrayList<Question> questions;
+	final private ArrayList<String> schools;
+	
+	public Quiz() {
+		questions = new ArrayList<Question>();
+		schools = new ArrayList<String>();
+	}
 	
 	public Date getDate() {
 		return date;

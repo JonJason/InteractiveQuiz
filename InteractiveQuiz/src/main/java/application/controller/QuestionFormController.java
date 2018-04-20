@@ -26,9 +26,6 @@ import javafx.stage.FileChooser.ExtensionFilter;
 public class QuestionFormController extends BaseController {
 
 	@FXML
-	TextField titleTextField;
-
-	@FXML
 	TextArea textTextArea;
 
 	@FXML
@@ -139,11 +136,6 @@ public class QuestionFormController extends BaseController {
 
 	private void parseData() {
 
-		// title
-		if (!titleTextField.getText().equals("")) {
-			question.setTitle(titleTextField.getText());
-		}
-
 		// text
 		if (!textTextArea.getText().equals("")) {
 			question.setText(textTextArea.getText());
@@ -170,11 +162,6 @@ public class QuestionFormController extends BaseController {
 	}
 
 	private void serializeData() {
-
-		// title
-		if (question.getTitle() != null) {
-			titleTextField.setText(question.getTitle());
-		}
 
 		// text
 		if (question.getText() != null) {

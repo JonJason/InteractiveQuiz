@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 public class Question implements Serializable {
 
-	private String title;
 	private String text;
 	private String picture;
 	private ArrayList<String> topics = new ArrayList<String>();
@@ -17,14 +16,6 @@ public class Question implements Serializable {
 		answers.add("");
 		answers.add("");
 		answers.add("");
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
 	}
 
 	public String getText() {
@@ -83,8 +74,7 @@ public class Question implements Serializable {
 	}
 
 	public String toString() {
-		return getClass().getName() + "[" +
-		"title=" + title + ", " +
+		return getClass().getSimpleName() + " [" +
 		"text=" + text + ", " +
 		"picture=" + picture + ", " +
 		"topics=" + topics + ", " +
