@@ -2,7 +2,9 @@ package application.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import application.model.Question;
@@ -26,43 +28,46 @@ import javafx.stage.FileChooser.ExtensionFilter;
 public class QuestionFormController extends BaseController {
 
 	@FXML
-	TextArea textTextArea;
+	private TextArea textTextArea;
 
 	@FXML
-	ImageView pictureImageView;
+	private ImageView pictureImageView;
 
 	@FXML
-	Label pictureLabel;
+	private Label pictureLabel;
+	
+	@FXML
+	private Button deletePictureButton;
 
 	@FXML
-	TextField answerTextField1;
+	private TextField answerTextField1;
 
 	@FXML
-	TextField answerTextField2;
+	private TextField answerTextField2;
 
 	@FXML
-	TextField answerTextField3;
+	private TextField answerTextField3;
 
 	@FXML
-	TextField answerTextField4;
+	private TextField answerTextField4;
 
 	@FXML
-	ToggleButton correctAnswerButton1;
+	private ToggleButton correctAnswerButton1;
 
 	@FXML
-	ToggleButton correctAnswerButton2;
+	private ToggleButton correctAnswerButton2;
 
 	@FXML
-	ToggleButton correctAnswerButton3;
+	private ToggleButton correctAnswerButton3;
 
 	@FXML
-	ToggleButton correctAnswerButton4;
+	private ToggleButton correctAnswerButton4;
 
 	@FXML
-	ListView<String> providerTopicsListView;
+	private ListView<String> providerTopicsListView;
 
 	@FXML
-	ListView<String> attachedTopicsListView;
+	private ListView<String> attachedTopicsListView;
 
 	private Question question;
 	private ObservableList<String> providerTopics;
@@ -116,10 +121,20 @@ public class QuestionFormController extends BaseController {
             imgPath = Storage.storeAndGetImage(source);
             pictureLabel.setText(source.getName());
             pictureImageView.setImage(new Image(imgPath));
+            deletePictureButton.setDisable(false);
         } catch (URISyntaxException | IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+	}
+	
+	@FXML
+	private void deletePicture(ActionEvent e) {
+
+		imgPath = null;
+		pictureLabel.setText(null);
+		pictureImageView.setImage(new Image(getClass().getResource("/img/placeholder.png").toString()));
+		deletePictureButton.setDisable(true);
 	}
 
 	@FXML
@@ -171,6 +186,9 @@ public class QuestionFormController extends BaseController {
 		if (question.getPicture() != null) {
 			imgPath = question.getPicture();
             pictureImageView.setImage(new Image(imgPath));
+            deletePictureButton.setDisable(false);
+		} else {
+            deletePictureButton.setDisable(true);
 		}
 
 		// answers

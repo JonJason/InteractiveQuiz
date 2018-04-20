@@ -14,6 +14,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
@@ -24,6 +25,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.util.Pair;
@@ -85,9 +87,20 @@ public class QuizHomeController extends BaseController {
 		        Stage newStage = new Stage();
 		        newStage.setTitle("Quiz Administrator");
 
-		        newStage.setScene(new Scene(new AdminHomeController().getRoot(), 670, 400));
+		        newStage.setScene(new Scene(new AdminHomeController().getRoot(), 720, 500));
 
 		        newStage.initOwner(owner);
+		        
+		        newStage.setOnCloseRequest(event -> {
+
+		            Alert closeConfirmation = AlertThrower.createCloseConfrimationAlert(newStage);
+
+		            Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
+		            if (!ButtonType.OK.equals(closeResponse.get())) {
+		                event.consume();
+		            }
+		        });
+		        
 		        newStage.show();
 			}
 		});

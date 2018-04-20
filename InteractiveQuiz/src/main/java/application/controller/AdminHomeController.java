@@ -38,13 +38,13 @@ public class AdminHomeController extends BaseController {
 
 		super("adminhome");
 		
-		initTabs();
-		
 		try {
 			quiz = Storage.loadQuiz();
 			questions = FXCollections.observableArrayList(Storage.loadQuestions());
 			topics = FXCollections.observableArrayList(Storage.loadTopics());
 			schools = FXCollections.observableArrayList(Storage.loadSchools());
+			
+			initTabs();
 
 			bindData();
 		} catch (ClassNotFoundException | IOException e) {
@@ -54,7 +54,7 @@ public class AdminHomeController extends BaseController {
 	}
 	
 	private void initTabs() {
-		quizController = new AdminQuizTabController();
+		quizController = new AdminQuizTabController(quiz);
 		questionsController = new AdminQuestionsTabController();
 		topicsController = new AdminTopicsTabController();
 		schoolsController = new AdminSchoolsTabController();
@@ -67,7 +67,6 @@ public class AdminHomeController extends BaseController {
 	
 	private void bindData() {
 		
-		quizController.setQuiz(quiz);
 		quizController.setQuestions(questions);
 		quizController.setTopics(topics);
 		quizController.setSchools(schools);

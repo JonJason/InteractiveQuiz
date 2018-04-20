@@ -158,9 +158,7 @@ public class QuizLayoutController extends BaseController {
 	}
 	
 	private void noteResult(int result) {
-		// default 0
-		// incorrect 1
-		// correct 2
+		// default 0, incorrect 1, correct 2
 		score[position] = result;
 		
 		switch (result) {
