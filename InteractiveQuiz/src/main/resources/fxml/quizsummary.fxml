@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <GridPane BorderPane.alignment="CENTER">
@@ -20,8 +19,8 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="You Got 50!" GridPane.halignment="CENTER" />
-            <GridPane GridPane.rowIndex="1">
+            <Label fx:id="scoreLabel" text="You Got 50!" GridPane.halignment="CENTER" />
+            <GridPane hgap="5.0" vgap="5.0" GridPane.rowIndex="1">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -30,17 +29,20 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <Label text="Result :" GridPane.halignment="RIGHT" />
                   <Label text="Total Correct Answers :" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                   <Label text="Total Incorrect Answers :" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label text="Label" GridPane.columnIndex="1" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="correctLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="resultLabel" GridPane.columnIndex="1" />
+                  <Label fx:id="incorrectLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label text="Total Passed Answers :" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+                  <Label fx:id="passedLabel" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
-            <Button mnemonicParsing="false" text="Return to home" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onAction="#showHome" text="Return to home" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </center>

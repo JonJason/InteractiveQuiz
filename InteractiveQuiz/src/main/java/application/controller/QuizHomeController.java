@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -21,6 +22,7 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -29,14 +31,14 @@ import javafx.util.Pair;
 public class QuizHomeController extends BaseController {
 
 	@FXML
-	private Button startButton;
+	private BorderPane borderPane;
 	
 	@FXML
-	private Button adminButton;
+	private GridPane homeGridPane;
 
 	public QuizHomeController() {
 
-		loadFXML("quizhome");
+		super("quizhome");
 
 	}
 	
@@ -46,7 +48,8 @@ public class QuizHomeController extends BaseController {
 		try {
 			Quiz quiz = Storage.loadQuiz();
 
-			ChoiceDialog<String> dialog = new ChoiceDialog<String>(quiz.getSchools().get(0), quiz.getSchools());
+			ChoiceDialog<String> dialog = new ChoiceDialog<String>(
+					quiz.getSchools().get(0), quiz.getSchools());
 			dialog.setTitle("School");
 			dialog.setHeaderText("Pick your School");
 			dialog.setContentText("Choose your school:");
@@ -71,7 +74,8 @@ public class QuizHomeController extends BaseController {
 		Optional<Pair<String, String>> result = dialog.showAndWait();
 
 		result.ifPresent(usernamePassword -> {
-			if (usernamePassword.getKey() == "admin" && usernamePassword.getValue() == "team7") {
+			if (usernamePassword.getKey() == "admin" && 
+					usernamePassword.getValue() == "team_7") {
 				AlertThrower.showAlert("Invalid Login", "Wrong Username or Password", 
 						"Please enter the correct username and password", "warning");
 			} else {
@@ -93,7 +97,12 @@ public class QuizHomeController extends BaseController {
 	private void showQuizLayout(Quiz quiz, String school) {
 		try {
 			Statistic statistic = Storage.loadStatistic(quiz.getName(), school);
-			System.out.println(statistic);
+			
+			QuizLayoutController quizLayoutController = 
+					new QuizLayoutController(quiz, school, statistic);
+			quizLayoutController.setQuizHomeController(this);
+			
+			showView(quizLayoutController.getRoot());
 		} catch (ClassNotFoundException | IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -119,9 +128,9 @@ public class QuizHomeController extends BaseController {
 		PasswordField password = new PasswordField();
 		password.setPromptText("Password");
 
-		grid.add(new Label("Username:"), 0, 0);
+		grid.add(new Label("Username :"), 0, 0);
 		grid.add(username, 1, 0);
-		grid.add(new Label("Password:"), 0, 1);
+		grid.add(new Label("Password :"), 0, 1);
 		grid.add(password, 1, 1);
 		
 		Node loginButton = dialog.getDialogPane().lookupButton(loginButtonType);
@@ -143,6 +152,14 @@ public class QuizHomeController extends BaseController {
 		});
 		
 		return dialog;
+	}
+	
+	public void showHome() {
+		showView(homeGridPane);
+	}
+
+	public void showView(Parent root) {
+		borderPane.setCenter(root);
 	}
 
 }

@@ -50,7 +50,7 @@ public class AdminQuizSetupController extends BaseController {
 	
 	public AdminQuizSetupController() {
 		
-		loadFXML("adminquizsetup");
+		super("adminquizsetup");
 		
 		questionsListWidgetController = new QuestionsListWidgetController();
 		questionsGridPane.add(questionsListWidgetController.getRoot(), 0, 0);

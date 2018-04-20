@@ -28,6 +28,18 @@ public class Statistic implements Serializable {
 		return school;
 	}
 	
+	public void incCorrect(int i) {
+		data.get(i).incCorrect();
+	}
+	
+	public void incIncorrect(int i) {
+		data.get(i).incIncorrect();
+	}
+	
+	public void incGivenupTime(int i) {
+		data.get(i).incGivenupTime();
+	}
+	
 	public ArrayList<StatisticData> getData() {
 		return data;
 	}

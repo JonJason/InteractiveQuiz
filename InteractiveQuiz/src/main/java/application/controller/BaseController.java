@@ -8,13 +8,17 @@ import javafx.scene.Parent;
 public class BaseController {
 	
 	private Parent root;
+	
+	public BaseController(String name) {
+		loadFXML(name);
+	}
 
 	/**
 	 * load fxml view and init controller.
 	 * 
 	 * @param name - fxml-file's name.
 	 */
-	protected void loadFXML(String name) {
+	private void loadFXML(String name) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/" + name + ".fxml"));
         fxmlLoader.setController(this);

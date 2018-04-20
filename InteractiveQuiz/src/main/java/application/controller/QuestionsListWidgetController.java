@@ -24,8 +24,7 @@ public class QuestionsListWidgetController extends BaseController {
 	private ObservableList<Question> questions;
 
 	public QuestionsListWidgetController() {
-
-		loadFXML("questionslistwidget");
+		super("questionslistwidget");
 
 	}
 

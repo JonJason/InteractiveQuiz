@@ -36,7 +36,7 @@ public class AdminHomeController extends BaseController {
 
 	public AdminHomeController() {
 
-		loadFXML("adminhome");
+		super("adminhome");
 		
 		initTabs();
 		

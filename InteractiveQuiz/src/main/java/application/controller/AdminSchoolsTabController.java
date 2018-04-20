@@ -24,7 +24,7 @@ public class AdminSchoolsTabController extends BaseController {
 
 	public AdminSchoolsTabController() {
 
-		loadFXML("adminschoolstab");
+		super("adminschoolstab");
 		
 	}
 	

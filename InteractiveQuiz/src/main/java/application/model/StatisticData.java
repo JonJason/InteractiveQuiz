@@ -15,24 +15,24 @@ public class StatisticData {
 		return answeredCorrectly;
 	}
 	
-	public void setAnsweredCorrectly(int answeredCorrectly) {
-		this.answeredCorrectly = answeredCorrectly;
+	public void incCorrect() {
+		answeredCorrectly++;
 	}
 	
 	public int getAnsweredIncorrectly() {
 		return answeredIncorrectly;
 	}
 	
-	public void setAnsweredIncorrectly(int answeredIncorrectly) {
-		this.answeredIncorrectly = answeredIncorrectly;
+	public void incIncorrect() {
+		answeredIncorrectly++;
 	}
 	
 	public int getGivenUpTime() {
 		return givenUpTime;
 	}
 	
-	public void setGivenUpTime(int givenUpTime) {
-		this.givenUpTime = givenUpTime;
+	public void incGivenupTime() {
+		givenUpTime++;
 	}
 	
 	public String toString() {

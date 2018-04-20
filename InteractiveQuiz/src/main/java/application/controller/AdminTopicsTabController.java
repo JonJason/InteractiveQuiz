@@ -24,7 +24,7 @@ public class AdminTopicsTabController extends BaseController {
 
 	public AdminTopicsTabController() {
 
-		loadFXML("admintopicstab");
+		super("admintopicstab");
 		
 	}
 	
@@ -46,7 +46,8 @@ public class AdminTopicsTabController extends BaseController {
 				topics.add(topic);
 				Storage.saveTopics( new ArrayList<String>(topics));
 			} else {
-				AlertThrower.showAlert("Invalid Input", "input was empty", "no topic added", "warning");
+				AlertThrower.showAlert("Invalid Input", "input was empty", 
+						"no topic added", "warning");
 			}
 		});
 		
@@ -56,7 +57,8 @@ public class AdminTopicsTabController extends BaseController {
 	private void showEditTopicDialog(ActionEvent e) {
 		String selectedTopic = topicsListView.getSelectionModel().getSelectedItem();
 		if (selectedTopic == null) {
-			AlertThrower.showAlert("No topic Selected", "No topic Selected", "Please select a topic that you want to edit", "warning");
+			AlertThrower.showAlert("No topic Selected", "No topic Selected", 
+					"Please select a topic that you want to edit", "warning");
 			return;
 		}
 		
@@ -76,7 +78,8 @@ public class AdminTopicsTabController extends BaseController {
 					Storage.saveTopics( new ArrayList<String>(topics));	
 				}
 			} else {
-				AlertThrower.showAlert("Invalid Input", "input was empty", "topic wasn't changed", "warning");
+				AlertThrower.showAlert("Invalid Input", "input was empty", 
+						"topic wasn't changed", "warning");
 			}
 		});
 		
@@ -86,11 +89,13 @@ public class AdminTopicsTabController extends BaseController {
 	private void showDeleteTopicDialog(ActionEvent e) {
 		String selectedTopic = topicsListView.getSelectionModel().getSelectedItem();
 		if (selectedTopic == null) {
-			AlertThrower.showAlert("No topic Selected", "No topic Selected", "Please select a topic that you want to delete", "warning");
+			AlertThrower.showAlert("No topic Selected", "No topic Selected", 
+					"Please select a topic that you want to delete", "warning");
 			return;
 		}
 		
-		Alert confirmationAlert = AlertThrower.createAlert("Delete Confirmation", "Are you sure you want to delete: " + selectedTopic, null, "confirm");
+		Alert confirmationAlert = AlertThrower.createAlert("Delete Confirmation", 
+				"Are you sure you want to delete: " + selectedTopic, null, "confirm");
 		Optional<ButtonType> answer = confirmationAlert.showAndWait();
 		if (answer.get() == ButtonType.OK){
 			topics.remove(selectedTopic);

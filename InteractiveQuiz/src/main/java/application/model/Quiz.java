@@ -36,6 +36,10 @@ public class Quiz implements Serializable  {
 		return questions;
 	}
 	
+	public Question getQuestion(int index) {
+		return questions.get(index);
+	}
+	
 	public void setQuestions(ArrayList<Question> questions) {
 		this.questions.clear();
 		this.questions.addAll(questions);

@@ -23,7 +23,7 @@ public class AdminQuestionsTabController extends BaseController {
 
 	public AdminQuestionsTabController() {
 
-		loadFXML("adminquestionstab");
+		super("adminquestionstab");
 		
 		questionsListWidgetController = new QuestionsListWidgetController();
 		((GridPane) this.getRoot()).add(questionsListWidgetController.getRoot(), 0, 0);

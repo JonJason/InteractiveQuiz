@@ -2,7 +2,9 @@ package tests.util;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -21,7 +23,7 @@ class StorageTest {
 	@BeforeEach
 	void setUp() throws FileNotFoundException, ClassNotFoundException, IOException {
 		Storage.setup();
-		ArrayList<Question> questions = Storage.loadQuestions();
+		questions = Storage.loadQuestions();
 		
 		questionSize = questions.size();
 		
@@ -61,7 +63,7 @@ class StorageTest {
 	
 	@AfterEach
 	void cleanUp() throws FileNotFoundException, ClassNotFoundException, IOException {
-		ArrayList<Question> questions = Storage.loadQuestions();
+		questions = Storage.loadQuestions();
 		questions.remove(questions.size() - 1);
 		questions.remove(questions.size() - 1);
 		Storage.saveQuestions(questions);
@@ -74,6 +76,36 @@ class StorageTest {
 		assertEquals(loadedQuestions.get(0).getText(), loadedQuestions.get(0).getText());
 		assertEquals(loadedQuestions.get(1).getText(), loadedQuestions.get(1).getText());
 		
+	}
+	
+	@Test
+	void notATest() throws FileNotFoundException, ClassNotFoundException, IOException {
+		questions = Storage.loadQuestions();
+		questions.clear();
+        FileReader fileReader = new FileReader("questions.txt");
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        
+        for (int i = 0; i < 10; i++) {
+        	Question question = new Question();
+        	question.setText(bufferedReader.readLine());
+        	
+        	question.setAnswer(0, bufferedReader.readLine());
+        	question.setAnswer(1, bufferedReader.readLine());
+        	question.setAnswer(2, bufferedReader.readLine());
+        	question.setAnswer(3, bufferedReader.readLine());
+
+        	question.setCorrectAnswerIndex(Integer.parseInt(bufferedReader.readLine()));
+        	
+        	questions.add(question);
+        	bufferedReader.readLine();
+        }
+
+        questions.add(new Question());
+        questions.add(new Question());
+
+		Storage.saveQuestions(questions);
+        // Always close files.
+        bufferedReader.close();
 	}
 
 }

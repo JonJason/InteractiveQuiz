@@ -72,6 +72,10 @@ public class Question implements Serializable {
 	public void setCorrectAnswerIndex(int correctAnswerIndex) {
 		this.correctAnswerIndex = correctAnswerIndex;
 	}
+	
+	public String getCorrectAnswer() {
+		return answers.get(correctAnswerIndex);
+	}
 
 	public String toString() {
 		return getClass().getSimpleName() + " [" +

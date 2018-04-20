@@ -72,7 +72,7 @@ public class QuestionFormController extends BaseController {
 
 	public QuestionFormController() {
 
-		loadFXML("questionform");
+		super("questionform");
 
 		correctButtons.add(correctAnswerButton1);
 		correctButtons.add(correctAnswerButton2);
