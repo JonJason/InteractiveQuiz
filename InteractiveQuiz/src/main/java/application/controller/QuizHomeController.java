@@ -1,6 +1,7 @@
 package application.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Optional;
 
 import application.model.Quiz;
@@ -25,7 +26,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.util.Pair;
@@ -87,7 +87,7 @@ public class QuizHomeController extends BaseController {
 		        Stage newStage = new Stage();
 		        newStage.setTitle("Quiz Administrator");
 
-		        newStage.setScene(new Scene(new AdminHomeController().getRoot(), 720, 500));
+		        newStage.setScene(new Scene(new AdminHomeController().getRoot(), 735, 500));
 
 		        newStage.initOwner(owner);
 		        
@@ -110,6 +110,9 @@ public class QuizHomeController extends BaseController {
 	private void showQuizLayout(Quiz quiz, String school) {
 		try {
 			Statistic statistic = Storage.loadStatistic(quiz.getName(), school);
+			statistic.cloneQuestions(quiz.getQuestions());
+	        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
+			statistic.setDateString(formatter.format(quiz.getDate()));
 			
 			QuizLayoutController quizLayoutController = 
 					new QuizLayoutController(quiz, school, statistic);

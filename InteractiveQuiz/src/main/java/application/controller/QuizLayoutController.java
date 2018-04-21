@@ -10,6 +10,7 @@ import application.model.Question;
 import application.model.Quiz;
 import application.model.Statistic;
 import application.util.AlertThrower;
+import application.util.Storage;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -104,6 +105,11 @@ public class QuizLayoutController extends BaseController {
 				"Are you sure you want to give up on this one? ", null, "confirm");
 		Optional<ButtonType> answer = confirmationAlert.showAndWait();
 		if (answer.get() == ButtonType.OK){
+			Alert dialog = AlertThrower.createAlert("That's Too Bad!", 
+					"The Correct Answer is " + 
+					questionLayoutController.getCorrectAnswer(), null, "info");
+			dialog.showAndWait();
+			
 			noteResult(0); // pass
 			nextQuestion();
 		}
@@ -128,6 +134,7 @@ public class QuizLayoutController extends BaseController {
 				"Are you sure you want to quit the quiz? ", null, "confirm");
 		Optional<ButtonType> answer = confirmationAlert.showAndWait();
 		if (answer.get() == ButtonType.OK){
+			stopTimer();
 			quizHomeController.showHome();
 		}
 	}
@@ -177,6 +184,7 @@ public class QuizLayoutController extends BaseController {
 		
 		}
 		
+		Storage.saveStatistic(statistic);
 		
 	}
 	
@@ -201,6 +209,12 @@ public class QuizLayoutController extends BaseController {
 		questionBorderPane.setCenter(questionLayoutController.getRoot());
 		
 		restartTimer();
+	}
+	
+	private void stopTimer() {
+		if (timeline != null) {
+    		timeline.stop();
+    	}
 	}
 	
 	private void restartTimer() {
@@ -233,6 +247,8 @@ public class QuizLayoutController extends BaseController {
 	}
 	
 	private void showSummary() {
+		stopTimer();
+		
 		int correct = 0;
 		int incorrect = 0;
 		int passed = 0;

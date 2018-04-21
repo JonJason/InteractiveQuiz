@@ -1,6 +1,8 @@
 package application.model;
 
-public class StatisticData {
+import java.io.Serializable;
+
+public class StatisticData  implements Serializable {
 	private int answeredCorrectly;
 	private int answeredIncorrectly;
 	private int givenUpTime;

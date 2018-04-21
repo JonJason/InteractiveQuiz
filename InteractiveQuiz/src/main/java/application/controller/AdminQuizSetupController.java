@@ -158,11 +158,12 @@ public class AdminQuizSetupController extends BaseController {
 		    @Override
 		    protected void updateItem(Question question, boolean empty) {
 		        super.updateItem(question, empty);
+		        int index = attachedQuestions.indexOf(question);
 
 		        if (empty || question == null || question.getText() == null) {
 		            setText(null);
 		        } else {
-		            setText(question.getText());
+		            setText(Integer.toString(index + 1) + ". " + question.getText());
 		        }
 		    }
 		});
