@@ -130,7 +130,11 @@ public class AdminQuizTabController extends BaseController {
 	public void renderQuiz() {
 		quizNameLabel.setText(quiz.getName());
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-		quizDateLabel.setText(formatter.format(quiz.getDate()));
+        if (quiz.getDate() == null) {
+        	quizDateLabel.setText("Not Set Yet");
+        } else {
+    		quizDateLabel.setText(formatter.format(quiz.getDate()));
+        }
 	}
 
 	private void renderChart() {

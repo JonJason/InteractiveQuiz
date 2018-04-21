@@ -76,8 +76,10 @@ public class QuizHomeController extends BaseController {
 		Optional<Pair<String, String>> result = dialog.showAndWait();
 
 		result.ifPresent(usernamePassword -> {
-			if (usernamePassword.getKey() == "admin" && 
-					usernamePassword.getValue() == "team_7") {
+			System.out.println(usernamePassword.getKey().equals("admin"));
+			System.out.println(usernamePassword.getValue().equals("team_7"));
+			if (!usernamePassword.getKey().equals("admin") || 
+					!usernamePassword.getValue().equals("team_7")) {
 				AlertThrower.showAlert("Invalid Login", "Wrong Username or Password", 
 						"Please enter the correct username and password", "warning");
 			} else {
