@@ -71,6 +71,8 @@ public class AdminQuizTabController extends BaseController {
 	private XYChart.Series<String, Integer> incorrectSeries;
 	private XYChart.Series<String, Integer> givenUpSeries;
 
+	private QuizHomeController quizHomeController;
+
 	public AdminQuizTabController(Quiz quiz) {
 
 		super("adminquiztab");
@@ -106,6 +108,7 @@ public class AdminQuizTabController extends BaseController {
 		Optional<Quiz> result = dialog.showAndWait();
 		result.ifPresent(quiz -> {
 			Storage.saveQuiz(quiz);
+			quizHomeController.updateQuizData();
 			renderQuiz();
 		});
 	}
@@ -415,5 +418,9 @@ public class AdminQuizTabController extends BaseController {
 			break;
 		}
 		
+	}
+
+	public void setQuizHomeController(QuizHomeController quizHomeController) {
+		this.quizHomeController = quizHomeController;		
 	}
 }

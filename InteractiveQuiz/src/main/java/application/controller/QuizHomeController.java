@@ -37,34 +37,40 @@ public class QuizHomeController extends BaseController {
 	
 	@FXML
 	private GridPane homeGridPane;
+	
+	@FXML
+	private Label quizTitleLabel;
+	
+	private Quiz quiz;
 
 	public QuizHomeController() {
 
 		super("quizhome");
 
+		try {
+			quiz = Storage.loadQuiz();
+			
+			updateQuizData();
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@FXML
 	private void startQuiz(ActionEvent e) {
 
-		try {
-			Quiz quiz = Storage.loadQuiz();
+		ChoiceDialog<String> dialog = new ChoiceDialog<String>(
+				quiz.getSchools().get(0), quiz.getSchools());
+		dialog.setTitle("School");
+		dialog.setHeaderText("Pick your School");
+		dialog.setContentText("Choose your school:");
 
-			ChoiceDialog<String> dialog = new ChoiceDialog<String>(
-					quiz.getSchools().get(0), quiz.getSchools());
-			dialog.setTitle("School");
-			dialog.setHeaderText("Pick your School");
-			dialog.setContentText("Choose your school:");
+		Optional<String> result = dialog.showAndWait();
 
-			Optional<String> result = dialog.showAndWait();
-
-			result.ifPresent(school -> {
-				showQuizLayout(quiz, school);
-			});
-		} catch (ClassNotFoundException | IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		result.ifPresent(school -> {
+			showQuizLayout(quiz, school);
+		});
 	}
 	
 	@FXML
@@ -88,8 +94,12 @@ public class QuizHomeController extends BaseController {
 
 		        Stage newStage = new Stage();
 		        newStage.setTitle("Quiz Administrator");
+		        
+		        AdminHomeController adminHomeController = new AdminHomeController(quiz);
+		        
+		        adminHomeController.setQuizHomeController(this);
 
-		        newStage.setScene(new Scene(new AdminHomeController().getRoot(), 735, 500));
+		        newStage.setScene(new Scene(adminHomeController.getRoot(), 735, 500));
 
 		        newStage.initOwner(owner);
 		        
@@ -178,6 +188,13 @@ public class QuizHomeController extends BaseController {
 
 	public void showView(Parent root) {
 		borderPane.setCenter(root);
+	}
+
+	public void updateQuizData() {
+		
+		if (quiz.getName() != null) {
+			quizTitleLabel.setText(quiz.getName());	
+		}
 	}
 
 }

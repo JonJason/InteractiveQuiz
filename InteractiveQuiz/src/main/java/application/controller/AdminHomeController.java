@@ -34,12 +34,14 @@ public class AdminHomeController extends BaseController {
 	private ObservableList<String> topics;
 	private ObservableList<String> schools;
 
-	public AdminHomeController() {
+	private QuizHomeController quizHomeController;
+
+	public AdminHomeController(Quiz quiz) {
 
 		super("adminhome");
 		
 		try {
-			quiz = Storage.loadQuiz();
+			this.quiz = quiz;
 			questions = FXCollections.observableArrayList(Storage.loadQuestions());
 			topics = FXCollections.observableArrayList(Storage.loadTopics());
 			schools = FXCollections.observableArrayList(Storage.loadSchools());
@@ -77,6 +79,12 @@ public class AdminHomeController extends BaseController {
 		topicsController.setTopics(topics);
 		
 		schoolsController.setSchools(schools);
+		
+	}
+
+	public void setQuizHomeController(QuizHomeController quizHomeController) {
+		this.quizHomeController = quizHomeController;
+		quizController.setQuizHomeController(quizHomeController);
 		
 	}
 }
