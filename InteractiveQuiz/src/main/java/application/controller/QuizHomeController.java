@@ -122,6 +122,9 @@ public class QuizHomeController extends BaseController {
 	private void showQuizLayout(Quiz quiz, String school) {
 		try {
 			Statistic statistic = Storage.loadStatistic(quiz.getName(), school);
+			if (statistic == null) {
+				statistic = new Statistic(quiz.getName(), school, quiz.getQuestions().size());
+			}
 			statistic.cloneQuestions(quiz.getQuestions());
 	        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
 			statistic.setDateString(formatter.format(quiz.getDate()));

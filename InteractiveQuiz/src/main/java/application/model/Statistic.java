@@ -12,13 +12,13 @@ public class Statistic implements Serializable {
 	private ArrayList<Question> questions;
 	private String dateString;
 
-	public Statistic(String quizName, String school) {
+	public Statistic(String quizName, String school, int dataSize) {
 		this.quizName = quizName;
 		this.school = school;
 
-		data = new ArrayList<StatisticData>(10);
+		data = new ArrayList<StatisticData>();
 		
-		for(int i = 0;i < 10;i++) {
+		for(int i = 0;i < dataSize;i++) {
 			data.add(new StatisticData());
 		}
 	}

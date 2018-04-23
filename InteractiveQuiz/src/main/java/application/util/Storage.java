@@ -148,7 +148,7 @@ public class Storage {
 	public static Statistic loadStatistic(String quizName, String school) throws FileNotFoundException, ClassNotFoundException, IOException {
 		HashMap<String, HashMap<String, Statistic>> statistics = loadStatistics();
 		if (statistics.get(quizName) == null || statistics.get(quizName).get(school) == null) {
-			return new Statistic(quizName, school);
+			return null;
 		}
 		return statistics.get(quizName).get(school);
 	}
@@ -174,5 +174,12 @@ public class Storage {
 		}
 		Files.copy(source.toPath(), dest);
 		return Storage.class.getResource("/img/" + finalName + extension).toString();
+	}
+
+	public static void clearStatistics() {
+		File statisticsFile = new File(statisticsFilename);
+		if (statisticsFile.exists()) {
+			write(statisticsFilename, new HashMap<String, HashMap<String, Statistic>>());
+		}
 	}
 }

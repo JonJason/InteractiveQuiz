@@ -51,7 +51,8 @@ public class AdminQuestionsTabController extends BaseController {
 				questionsListWidgetController.updateFilteredQuestions();
 				Storage.saveQuestions(new ArrayList<Question>(questions));
 			} else {
-				AlertThrower.showAlert("Invalid Input", "input was empty", "no topic added", "warning");
+				AlertThrower.showAlert("Invalid Input", "input was empty", 
+						"no Question added", "warning");
 			}
 		});
 	}
@@ -60,7 +61,8 @@ public class AdminQuestionsTabController extends BaseController {
 	private void showEditQuestionDialog(ActionEvent e) {
 		Question selectedQuestion = questionsListWidgetController.getSelectedQuestion();
 		if (selectedQuestion == null) {
-			AlertThrower.showAlert("No topic Selected", "No topic Selected", "Please select a topic that you want to edit", "warning");
+			AlertThrower.showAlert("No Question Selected", "No Question Selected", 
+					"Please select a Question that you want to edit", "warning");
 			return;
 		}
 		
@@ -76,7 +78,8 @@ public class AdminQuestionsTabController extends BaseController {
 				questionsListWidgetController.updateFilteredQuestions();
 				Storage.saveQuestions( new ArrayList<Question>(questions));
 			} else {
-				AlertThrower.showAlert("Invalid Input", "input was empty", "topic wasn't changed", "warning");
+				AlertThrower.showAlert("Invalid Input", "input was empty", 
+						"Question wasn't changed", "warning");
 			}
 		});
 		
@@ -86,7 +89,8 @@ public class AdminQuestionsTabController extends BaseController {
 	private void showDeleteQuestionDialog(ActionEvent e) {
 		Question selectedQuestion = questionsListWidgetController.getSelectedQuestion();
 		if (selectedQuestion == null) {
-			AlertThrower.showAlert("No question Selected", "No question Selected", "Please select a question that you want to delete", "warning");
+			AlertThrower.showAlert("No question Selected", "No Question Selected", 
+					"Please select a Question that you want to delete", "warning");
 			return;
 		}
 		

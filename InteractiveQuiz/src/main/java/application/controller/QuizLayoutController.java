@@ -49,12 +49,12 @@ public class QuizLayoutController extends BaseController {
 	
 	private int position = 0;
 	private int seconds = 0;
-	private int[] score = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+	private ArrayList<Integer> score;
 	Timeline timeline;
 	
 	private ArrayList<Integer> order;
 	
-	static private Integer[] baseOrder = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+	private ArrayList<Integer> baseOrder;
 	
 	public QuizLayoutController(Quiz quiz, String school, Statistic statistic) {
 		
@@ -63,6 +63,14 @@ public class QuizLayoutController extends BaseController {
 		this.quiz = quiz;
 		this.school = school;
 		this.statistic = statistic;
+
+		baseOrder = new ArrayList<Integer>();
+		score = new ArrayList<Integer>();
+		
+		for (int i = 0; i < quiz.getQuestions().size(); i++) {
+			baseOrder.add(new Integer(i));
+			score.add(new Integer(0));
+		}
 		
 		renderLayout();
 		
@@ -142,7 +150,7 @@ public class QuizLayoutController extends BaseController {
 	private void shuffleQuestions() {
 		
 		long seed = System.nanoTime();
-		order = new ArrayList<Integer>(Arrays.asList(baseOrder));
+		order = (ArrayList<Integer>) baseOrder.clone();
 		Collections.shuffle(order, new Random(seed));
 		
 	}
@@ -155,8 +163,8 @@ public class QuizLayoutController extends BaseController {
 	private void resetQuiz() {
 		position = 0;
 
-		for(int i = 0; i < score.length; i++) {
-			score[i] = 0;
+		for(int i = 0; i < score.size(); i++) {
+			score.set(i, new Integer(0));
 		}
 		
 		shuffleQuestions();
@@ -166,7 +174,7 @@ public class QuizLayoutController extends BaseController {
 	
 	private void noteResult(int result) {
 		// default 0, incorrect 1, correct 2
-		score[position] = result;
+		score.set(position, new Integer(result));
 		
 		switch (result) {
 		
@@ -252,20 +260,15 @@ public class QuizLayoutController extends BaseController {
 		int correct = 0;
 		int incorrect = 0;
 		int passed = 0;
-		for(int i = 0; i < score.length; i++) {
-			switch(score[i]) {
-			case(0):
+		for(int i = 0; i < score.size(); i++) {
+			if (score.get(i).equals(0)) {
 				passed++;
-				break;
-			
-			case(1):
-				incorrect++;
-				break;
-			
-			case(2):
-				correct++;
-				break;
 				
+			} else if(score.get(i).equals(1)) {
+				incorrect++;
+				
+			} else if (score.get(i).equals(2)) {
+				correct++;
 			}
 		}
 		

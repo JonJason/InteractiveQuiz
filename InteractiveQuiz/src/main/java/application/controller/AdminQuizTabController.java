@@ -12,16 +12,19 @@ import application.model.Question;
 import application.model.Quiz;
 import application.model.Statistic;
 import application.model.StatisticData;
+import application.util.AlertThrower;
 import application.util.Storage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.scene.chart.BarChart;
@@ -44,7 +47,7 @@ public class AdminQuizTabController extends BaseController {
 	
 	@FXML
 	private Label totalGivenUpLabel;
-
+	
 	@FXML
 	private ChoiceBox<String> quizChoiceBox;
 
@@ -53,6 +56,12 @@ public class AdminQuizTabController extends BaseController {
 
 	@FXML
 	private BarChart<String, Integer> statisticBarChart;
+	
+	@FXML
+	private GridPane statisticGridPane;
+	
+	@FXML
+	private Label noStatisticLabel;
 
 	private Quiz quiz;
 	private ObservableList<String> statQuizNames;
@@ -91,6 +100,12 @@ public class AdminQuizTabController extends BaseController {
 		renderChart();
 
 		renderChoiceBoxes();
+		
+		if (statistics.keySet().isEmpty()) {
+			((GridPane) getRoot()).getChildren().remove(statisticGridPane);
+		} else {
+			((GridPane) getRoot()).getChildren().remove(noStatisticLabel);
+		}
 	}
 
 	@FXML
@@ -129,6 +144,20 @@ public class AdminQuizTabController extends BaseController {
 		String extension = file.getName().substring(file.getName().lastIndexOf("."), file.getName().length());
 		writeReport(file, extension);
 	}
+	
+	@FXML
+	private void resetStatistics(ActionEvent e) {
+		
+		Alert confirmationAlert = AlertThrower.createAlert("Reset Confirmation", 
+				"Are you sure you want to reset the Statistics?", null, "confirm");
+		
+		Optional<ButtonType> answer = confirmationAlert.showAndWait();
+		if (answer.get() == ButtonType.OK){
+			Storage.clearStatistics();
+			((GridPane) getRoot()).getChildren().remove(statisticGridPane);
+			((GridPane) getRoot()).add(noStatisticLabel, 0, 2);
+		}
+	}
 
 	public void renderQuiz() {
 		quizNameLabel.setText(quiz.getName());
@@ -155,9 +184,9 @@ public class AdminQuizTabController extends BaseController {
 		incorrectSeries = new XYChart.Series<String, Integer>(incorrectData);
 		givenUpSeries = new XYChart.Series<String, Integer>(givenUpData);
 
-		statisticBarChart.getData().add(correctSeries);
 		statisticBarChart.getData().add(incorrectSeries);
 		statisticBarChart.getData().add(givenUpSeries);
+		statisticBarChart.getData().add(correctSeries);
 
 		correctSeries.setName("Correctly Answered");
 		incorrectSeries.setName("Incorrectly Answered");
