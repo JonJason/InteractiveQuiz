@@ -9,16 +9,16 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane vgap="5.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vgap="5.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="230.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" />
    </columnConstraints>
    <rowConstraints>
       <RowConstraints valignment="TOP" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="-Infinity" prefHeight="260.0" valignment="TOP" vgrow="SOMETIMES" />
+      <RowConstraints valignment="TOP" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <ListView fx:id="questionsListView" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+      <ListView fx:id="questionsListView" minWidth="250.0" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>

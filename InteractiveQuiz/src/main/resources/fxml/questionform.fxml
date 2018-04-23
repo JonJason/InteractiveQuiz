@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
@@ -11,18 +12,22 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" vgap="5.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane hgap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" vgap="5.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
     <ColumnConstraints hgrow="SOMETIMES" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
     <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
       <RowConstraints vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
@@ -31,27 +36,27 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Picture :" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+      <Label text="Picture :" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Answers :" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+      <Label text="Answers :" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="TOP">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </Label>
-      <TextArea fx:id="textTextArea" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" />
-      <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <TextArea fx:id="textTextArea" prefHeight="50.0" prefWidth="500.0" GridPane.columnIndex="1" />
+      <GridPane hgap="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="90.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <ImageView fx:id="pictureImageView" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+            <ImageView fx:id="pictureImageView" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
@@ -71,58 +76,108 @@
             <Insets bottom="5.0" top="5.0" />
          </padding>
       </GridPane>
-      <GridPane hgap="5.0" vgap="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <GridPane hgap="5.0" vgap="5.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
           <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
             <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField fx:id="answerTextField1" />
-            <TextField fx:id="answerTextField2" GridPane.rowIndex="1" />
-            <TextField fx:id="answerTextField3" GridPane.rowIndex="2" />
-            <TextField fx:id="answerTextField4" GridPane.rowIndex="3" />
-            <ToggleButton fx:id="correctAnswerButton1" mnemonicParsing="false" onAction="#correctButtonPressed" text="Set as correct" GridPane.columnIndex="1" />
-            <ToggleButton fx:id="correctAnswerButton2" mnemonicParsing="false" onAction="#correctButtonPressed" text="Set as correct" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <ToggleButton fx:id="correctAnswerButton3" mnemonicParsing="false" onAction="#correctButtonPressed" text="Set as correct" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <ToggleButton fx:id="correctAnswerButton4" mnemonicParsing="false" onAction="#correctButtonPressed" text="Set as correct" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <HBox spacing="5.0">
+               <children>
+                  <TextField fx:id="answerTextField1" prefWidth="180.0" />
+                  <ToggleButton fx:id="correctAnswerButton1" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#correctButtonPressed" text="Set as correct">
+                     <graphic>
+                        <ImageView fitHeight="15.0" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/check2.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox spacing="5.0" GridPane.columnIndex="1">
+               <children>
+                  <TextField fx:id="answerTextField2" prefWidth="180.0" />
+                  <ToggleButton fx:id="correctAnswerButton2" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#correctButtonPressed" text="Set as correct">
+                     <graphic>
+                        <ImageView fitHeight="15.0" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/check2.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox spacing="5.0" GridPane.rowIndex="1">
+               <children>
+                  <TextField fx:id="answerTextField3" prefWidth="180.0" />
+                  <ToggleButton fx:id="correctAnswerButton3" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#correctButtonPressed" text="Set as correct">
+                     <graphic>
+                        <ImageView fitHeight="15.0" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/check2.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <TextField fx:id="answerTextField4" prefWidth="180.0" />
+                  <ToggleButton fx:id="correctAnswerButton4" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#correctButtonPressed" text="Set as correct">
+                     <graphic>
+                        <ImageView fitHeight="15.0" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/check2.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </ToggleButton>
+               </children>
+            </HBox>
          </children>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </GridPane>
-      <Label text="Topics :" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="TOP">
+      <Label text="Topics :" GridPane.halignment="RIGHT" GridPane.rowIndex="6" GridPane.valignment="TOP">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </Label>
-      <GridPane hgap="5.0" vgap="5.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <GridPane hgap="10.0" vgap="5.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="-Infinity" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="-Infinity" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
             <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <ListView fx:id="providerTopicsListView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="100.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <ListView fx:id="attachedTopicsListView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onAction="#addTopic" text="Add Topic" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" onAction="#removeTopic" text="Remove Topic" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <ListView fx:id="providerTopicsListView" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="100.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <ListView fx:id="attachedTopicsListView" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onAction="#addTopic" text="&gt;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+            <Button mnemonicParsing="false" onAction="#removeTopic" text="Remove" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
             <Label text="Provider" GridPane.halignment="CENTER" />
-            <Label fx:id="topicAttachedListView" text="Attached" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+            <Label fx:id="topicAttachedListView" text="Attached" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
          </children>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </GridPane>
+      <Separator prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+      <Separator prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+      <Separator prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
    </children>
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

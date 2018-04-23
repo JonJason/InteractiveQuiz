@@ -99,7 +99,7 @@ public class AdminQuestionsTabController extends BaseController {
 		if (answer.get() == ButtonType.OK){
 			questions.remove(selectedQuestion);
 			questionsListWidgetController.updateFilteredQuestions();
-			Storage.saveQuestions( new ArrayList<Question>(questions));
+			Storage.saveQuestions(new ArrayList<Question>(questions));
 		}
 	}
 

@@ -111,7 +111,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </HBox>
-            <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="120.0" spacing="5.0">
+            <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="130.0" spacing="5.0">
                <children>
                   <Label text="Date :" textAlignment="RIGHT" />
                   <Label fx:id="quizDateLabel" />

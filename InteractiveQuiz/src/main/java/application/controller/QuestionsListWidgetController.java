@@ -71,6 +71,7 @@ public class QuestionsListWidgetController extends BaseController {
 	public void updateFilteredQuestions() {
 
 		String topic = topicsComboBox.getSelectionModel().getSelectedItem();
+		questionsListView.setItems(null); // force update
 		
 		if (topic == null) {
 			questionsListView.setItems(questions);
