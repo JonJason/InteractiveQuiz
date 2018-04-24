@@ -69,7 +69,6 @@ public class QuestionFormController extends BaseController {
 	@FXML
 	private ListView<String> attachedTopicsListView;
 
-	private Question question;
 	private ObservableList<String> providerTopics;
 	private ObservableList<String> attachedTopics;
 	private String imgPath;
@@ -149,7 +148,9 @@ public class QuestionFormController extends BaseController {
 		};
 	}
 
-	private void parseData() {
+	private Question parseData() {
+		
+		Question question = new Question();
 
 		// text
 		if (!textTextArea.getText().equals("")) {
@@ -174,9 +175,11 @@ public class QuestionFormController extends BaseController {
 		}
 		question.setCorrectAnswerIndex(correctIndex);
 		question.setTopics(new ArrayList<String>(attachedTopics));
+		
+		return question;
 	}
 
-	private void serializeData() {
+	private void serializeData(Question question) {
 
 		// text
 		if (question.getText() != null) {
@@ -203,7 +206,7 @@ public class QuestionFormController extends BaseController {
 		}
 		
 		// topics
-		attachedTopics = FXCollections.observableArrayList(this.question.getTopics());
+		attachedTopics = FXCollections.observableArrayList(question.getTopics());
 		attachedTopicsListView.setItems(attachedTopics);
 	}
 
@@ -212,14 +215,12 @@ public class QuestionFormController extends BaseController {
 		providerTopicsListView.setItems(providerTopics);
 	}
 
-	public void setQuestion(Question question) {
-		this.question = question;
+	public void fillForm(Question question) {
 		
-		serializeData();
+		serializeData(question);
 	}
 
 	public Question getQuestion() {
-		parseData();
-		return question;
+		return parseData();
 	}
 }

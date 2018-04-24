@@ -40,13 +40,20 @@ public class AdminQuestionsTabController extends BaseController {
 			newQuestion.addTopic(questionsListWidgetController.getSelectedTopic());
 		}
 		
-		formController.setQuestion(newQuestion);
+		formController.fillForm(newQuestion);
 		
 		Dialog<Question> dialog = createQuestionDialog(formController, "new");
 		
 		Optional<Question> result = dialog.showAndWait();
 		result.ifPresent(question -> {
 			if (!question.getText().equals("")) {
+				
+				if(hasDuplicate(question, -1)) {
+					AlertThrower.showAlert("Duplicate Detected", "Question already exists", 
+							"question wasn't added", "warning");
+					return;
+				}
+				
 				questions.add(question);
 				questionsListWidgetController.updateFilteredQuestions();
 				Storage.saveQuestions(new ArrayList<Question>(questions));
@@ -68,17 +75,27 @@ public class AdminQuestionsTabController extends BaseController {
 		
 		QuestionFormController formController = new QuestionFormController();
 		formController.setTopics(topics);
-		formController.setQuestion(selectedQuestion);
+		formController.fillForm(selectedQuestion);
 		
 		Dialog<Question> dialog = createQuestionDialog(formController, "edit");
 		
 		Optional<Question> result = dialog.showAndWait();
 		result.ifPresent(question -> {
 			if (!question.getText().equals("")) {
+				int selectedIndex = questions.indexOf(selectedQuestion);
+				
+				if(hasDuplicate(question, selectedIndex)) {
+					AlertThrower.showAlert("Duplicate Detected", "Question already exists", 
+							"Question wasn't changed", "warning");
+					return;
+				}
+				
+				questions.set(selectedIndex, question);
+				
 				questionsListWidgetController.updateFilteredQuestions();
 				Storage.saveQuestions( new ArrayList<Question>(questions));
 			} else {
-				AlertThrower.showAlert("Invalid Input", "input was empty", 
+				AlertThrower.showAlert("Invalid Input", "Input was empty", 
 						"Question wasn't changed", "warning");
 			}
 		});
@@ -89,7 +106,7 @@ public class AdminQuestionsTabController extends BaseController {
 	private void showDeleteQuestionDialog(ActionEvent e) {
 		Question selectedQuestion = questionsListWidgetController.getSelectedQuestion();
 		if (selectedQuestion == null) {
-			AlertThrower.showAlert("No question Selected", "No Question Selected", 
+			AlertThrower.showAlert("No Question Selected", "No Question Selected", 
 					"Please select a Question that you want to delete", "warning");
 			return;
 		}
@@ -148,5 +165,18 @@ public class AdminQuestionsTabController extends BaseController {
 		
 		return dialog;
 		
+	}
+
+	private boolean hasDuplicate(Question question, int selectedIndex) {
+		
+		for (int i = 0; i < questions.size(); i++) {
+			
+			if (questions.get(i).getText().equals(question.getText()) && i != selectedIndex) {
+				return true;
+			}
+			
+		}
+		
+		return false;
 	}
 }

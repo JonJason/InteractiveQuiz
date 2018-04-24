@@ -43,6 +43,13 @@ public class AdminTopicsTabController extends BaseController {
 		Optional<String> result = dialog.showAndWait();
 		result.ifPresent(topic -> {
 			if (!topic.equals("") ) {
+				
+				if(topics.contains(topic)) {
+					AlertThrower.showAlert("Duplicate Detected", "Topic already exists", 
+							"topic wasn't added", "warning");
+					return;
+				}
+				
 				topics.add(topic);
 				Storage.saveTopics( new ArrayList<String>(topics));
 			} else {
@@ -74,6 +81,12 @@ public class AdminTopicsTabController extends BaseController {
 		result.ifPresent(topic -> {
 			if (!topic.equals("") ) {
 				if (!topic.equals(selectedTopic)) {
+					if(topics.contains(topic)) {
+						AlertThrower.showAlert("Duplicate Detected", "Topic already exists", 
+								"topic wasn't changed", "warning");
+						return;
+					}
+					
 					topics.set(topicsListView.getSelectionModel().getSelectedIndex(), topic);
 					Storage.saveTopics( new ArrayList<String>(topics));	
 				}

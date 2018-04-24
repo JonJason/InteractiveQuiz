@@ -43,6 +43,13 @@ public class AdminSchoolsTabController extends BaseController {
 		Optional<String> result = dialog.showAndWait();
 		result.ifPresent(school -> {
 			if (!school.equals("") ) {
+				
+				if(schools.contains(school)) {
+					AlertThrower.showAlert("Duplicate Detected", "School already exists", 
+							"school wasn't added", "warning");
+					return;
+				}
+				
 				schools.add(school);
 				Storage.saveSchools( new ArrayList<String>(schools));
 			} else {
@@ -72,6 +79,13 @@ public class AdminSchoolsTabController extends BaseController {
 		result.ifPresent(school -> {
 			if (!school.equals("") ) {
 				if (!school.equals(selectedSchool)) {
+					
+					if(schools.contains(school)) {
+						AlertThrower.showAlert("Duplicate Detected", "School already exists", 
+								"school wasn't changed", "warning");
+						return;
+					}
+					
 					schools.set(schoolsListView.getSelectionModel().getSelectedIndex(), school);
 					Storage.saveSchools( new ArrayList<String>(schools));	
 				}
