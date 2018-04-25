@@ -12,12 +12,16 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 
 public class QuestionLayoutController extends BaseController {
 	
 	@FXML
 	private Label questionLabel;
 
+	@FXML
+	private StackPane pictureStackPane;
+	
 	@FXML
 	private ImageView pictureImageView;
 
@@ -33,6 +37,7 @@ public class QuestionLayoutController extends BaseController {
 	@FXML
 	private RadioButton answerRadioButton4;
 	
+	@FXML
 	private ToggleGroup answerGroup;
 	
 	private ArrayList<RadioButton> answers;
@@ -58,8 +63,8 @@ public class QuestionLayoutController extends BaseController {
 		if (question.getPicture() != null) {
 			pictureImageView.setImage(new Image(question.getPicture()));
 		} else {
-			pictureImageView.setVisible(false);
-			pictureImageView.setManaged(false);
+			pictureStackPane.setVisible(false);
+			pictureStackPane.setManaged(false);
 		}
 	}
 	
@@ -78,10 +83,8 @@ public class QuestionLayoutController extends BaseController {
 		answers.add(answerRadioButton3);
 		answers.add(answerRadioButton4);
 		
-		answerGroup = new ToggleGroup();
 		for (int i = 0; i < answers.size(); i++) {
 			answers.get(i).setText(question.getAnswer(order.get(i).intValue()));
-			answers.get(i).setToggleGroup(answerGroup);
 		}
 	}
 	

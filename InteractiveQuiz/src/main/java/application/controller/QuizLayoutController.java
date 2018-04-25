@@ -210,7 +210,7 @@ public class QuizLayoutController extends BaseController {
 	private void showQuestion() {
 		
 		positionLabel.setText(Integer.toString(position + 1) + 
-				" / " + Integer.toString(order.size()));
+				"/" + Integer.toString(order.size()));
 		
 		Question question = quiz.getQuestion(order.get(position).intValue());
 		questionLayoutController = new QuestionLayoutController(question);
@@ -227,7 +227,7 @@ public class QuizLayoutController extends BaseController {
 	
 	private void restartTimer() {
 		seconds = 30;
-    	timerLabel.setText("0 : " + Integer.toString(seconds));
+    	timerLabel.setText("0:" + Integer.toString(seconds));
     	
     	if (timeline != null) {
     		timeline.stop();
@@ -237,7 +237,7 @@ public class QuizLayoutController extends BaseController {
     	        Duration.millis(1000),
     	        ae ->  {
     	        	seconds--;
-    	        	timerLabel.setText("0 : " + Integer.toString(seconds));
+    	        	timerLabel.setText("0:" + Integer.toString(seconds));
     	        }
     	    ));
     		

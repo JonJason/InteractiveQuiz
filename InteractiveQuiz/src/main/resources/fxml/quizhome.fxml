@@ -11,9 +11,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="borderPane" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <GridPane fx:id="homeGridPane" style="-fx-background-color: #BBDEFB; -fx-background-image: url(&quot;/img/background.jpg&quot;); -fx-background-position: center center;" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -41,10 +43,19 @@
             </Button>
             <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="150.0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowSpan="2" GridPane.valignment="CENTER">
                <children>
-                  <Label fx:id="quizTitleLabel" text="Not Set Yet" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                  <Label fx:id="quizTitleLabel" styleClass="quiz-title" text="Not Set Yet" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="Verdana" size="60.0" />
-                     </font></Label>
+                     </font>
+                     <textFill>
+                        <RadialGradient centerX="0.5" centerY="0.5047619047619047" radius="1.0">
+                           <stops>
+                              <Stop color="WHITE" />
+                              <Stop color="WHITE" offset="0.007662835249042145" />
+                              <Stop color="#c3c3c3" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </textFill></Label>
                   <Button contentDisplay="RIGHT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#startQuiz" styleClass="shiny-orange" text="Start Quiz" textAlignment="CENTER">
                      <font>
                         <Font size="24.0" />
