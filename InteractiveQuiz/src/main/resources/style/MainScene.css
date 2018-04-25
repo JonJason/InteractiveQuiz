@@ -85,7 +85,6 @@
 }
 
 .quiz-title {
-	
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 8,0.5,0,5 );
 }
 
@@ -178,4 +177,28 @@
         radial-gradient(center 50% -40%, radius 200%, #88ae06 45%, #509800 50%);
     -fx-background-radius: 50%;
     -fx-padding: 0;
+}
+
+.score-title {
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 8,0.5,0,5 );
+}
+
+.return-button {
+    -fx-background-color: 
+        linear-gradient(#f2f2f2, #d6d6d6),
+        linear-gradient(#fcfcfc 0%, #d9d9d9 20%, #d6d6d6 100%),
+        linear-gradient(#dddddd 0%, #f6f6f6 50%);
+    -fx-background-radius: 8,7,6;
+    -fx-background-insets: 0,1,2;
+    -fx-text-fill: #333333;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.result-text {
+    -fx-font-family: "Arial";
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #000;
 }

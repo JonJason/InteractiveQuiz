@@ -45,7 +45,7 @@
                <children>
                   <Label fx:id="quizTitleLabel" styleClass="quiz-title" text="Not Set Yet" textAlignment="CENTER" wrapText="true">
                      <font>
-                        <Font name="Verdana" size="60.0" />
+                        <Font name="Verdana" size="96.0" />
                      </font>
                      <textFill>
                         <RadialGradient centerX="0.5" centerY="0.5047619047619047" radius="1.0">

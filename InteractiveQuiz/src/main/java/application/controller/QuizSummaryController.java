@@ -23,6 +23,7 @@ public class QuizSummaryController extends BaseController {
 	final private int correct;
 	final private int incorrect;
 	final private int passed;
+	final private int total;
 	private QuizHomeController quizHomeController;
 
 	public QuizSummaryController(int correct, int incorrect, int passed) {
@@ -31,6 +32,7 @@ public class QuizSummaryController extends BaseController {
 		this.correct = correct;
 		this.incorrect = incorrect;
 		this.passed = passed;
+		total = correct + incorrect + passed;
 		
 		renderSummary();
 	}
@@ -41,8 +43,8 @@ public class QuizSummaryController extends BaseController {
 	}
 	
 	private void renderSummary() {
-		scoreLabel.setText("You got " + Integer.toString(correct * 10) + "!");
-		resultLabel.setText(Integer.toString(correct * 10));
+		scoreLabel.setText("You got " + Integer.toString(Math.round(correct * 100 / total)) + "!");
+		resultLabel.setText(Integer.toString(Math.round(correct * 100 / total)));
 		correctLabel.setText(Integer.toString(correct));
 		incorrectLabel.setText(Integer.toString(incorrect));
 		passedLabel.setText(Integer.toString(passed));
