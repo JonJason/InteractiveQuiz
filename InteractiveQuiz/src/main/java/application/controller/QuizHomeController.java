@@ -63,7 +63,8 @@ public class QuizHomeController extends BaseController {
 		ChoiceDialog<String> dialog = new ChoiceDialog<String>(
 				quiz.getSchools().get(0), quiz.getSchools());
 		dialog.setTitle("School");
-		dialog.setHeaderText("Pick your School");
+		dialog.setHeaderText(null);
+		dialog.setGraphic(null);
 		dialog.setContentText("Choose your school:");
 
 		Optional<String> result = dialog.showAndWait();
@@ -194,7 +195,7 @@ public class QuizHomeController extends BaseController {
 	public void updateQuizData() {
 		
 		if (quiz.getName() != null) {
-			quizTitleLabel.setText(quiz.getName());	
+			quizTitleLabel.setText(quiz.getName());
 		}
 	}
 

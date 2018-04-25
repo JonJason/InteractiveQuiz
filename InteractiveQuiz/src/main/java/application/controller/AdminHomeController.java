@@ -101,7 +101,9 @@ public class AdminHomeController extends BaseController {
 						
 						if (exists && c.wasReplaced()) {
 							for (Question addedQuestion : c.getAddedSubList()) {
+								System.out.println(addedQuestion.getPicture());
 								quiz.getQuestions().add(addedQuestion);
+								Storage.saveQuiz(quiz);
 							}
 						}
 					}

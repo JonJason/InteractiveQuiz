@@ -81,6 +81,8 @@ public class AdminQuestionsTabController extends BaseController {
 		
 		Optional<Question> result = dialog.showAndWait();
 		result.ifPresent(question -> {
+			System.out.println(selectedQuestion.getText());
+			System.out.println(selectedQuestion.getPicture());
 			if (!question.getText().equals("")) {
 				int selectedIndex = questions.indexOf(selectedQuestion);
 				
@@ -89,7 +91,7 @@ public class AdminQuestionsTabController extends BaseController {
 							"Question wasn't changed", "warning");
 					return;
 				}
-				
+				System.out.println("Yow");
 				questions.set(selectedIndex, question);
 				
 				questionsListWidgetController.updateFilteredQuestions();

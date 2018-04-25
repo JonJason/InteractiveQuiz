@@ -8,13 +8,14 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="borderPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <GridPane fx:id="homeGridPane" BorderPane.alignment="CENTER">
+      <GridPane fx:id="homeGridPane" style="-fx-background-color: #BBDEFB; -fx-background-image: url(&quot;/img/background.jpg&quot;); -fx-background-position: center center;" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints />
@@ -25,6 +26,7 @@
             <RowConstraints />
         </rowConstraints>
          <children>
+            <Pane fx:id="blurPane" opacity="0.4" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #0D47A1;" />
             <Button contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openAdmin" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 50%;" text="Admin" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
@@ -37,24 +39,20 @@
                   </ImageView>
                </graphic>
             </Button>
-            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="100.0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowSpan="2" GridPane.valignment="CENTER">
+            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="150.0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowSpan="2" GridPane.valignment="CENTER">
                <children>
-                  <Label fx:id="quizTitleLabel" text="Not Set Yet" textAlignment="CENTER" wrapText="true">
+                  <Label fx:id="quizTitleLabel" text="Not Set Yet" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                      <font>
-                        <Font size="60.0" />
+                        <Font name="Verdana" size="60.0" />
                      </font></Label>
-                  <Button contentDisplay="RIGHT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#startQuiz" text="Start Quiz" textAlignment="CENTER">
+                  <Button contentDisplay="RIGHT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#startQuiz" styleClass="shiny-orange" text="Start Quiz" textAlignment="CENTER">
                      <font>
                         <Font size="24.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" preserveRatio="true">
-                           <image>
-                              <Image url="@../img/play.png" />
-                           </image>
-                        </ImageView>
-                     </graphic></Button>
+                     </font></Button>
                </children>
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
             </VBox>
          </children>
       </GridPane>
