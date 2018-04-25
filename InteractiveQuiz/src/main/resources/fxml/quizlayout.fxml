@@ -181,7 +181,7 @@
                         </Label>
                         <Label fx:id="positionLabel" text="1/10">
                            <font>
-                              <Font name="Arial Bold" size="36.0" />
+                              <Font name="Arial Bold" size="32.0" />
                            </font>
                         </Label>
                      </children>
