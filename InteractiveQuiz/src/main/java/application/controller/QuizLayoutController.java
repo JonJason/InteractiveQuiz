@@ -9,6 +9,7 @@ import java.util.Random;
 import application.model.Question;
 import application.model.Quiz;
 import application.model.Statistic;
+import application.model.StatisticData;
 import application.util.AlertThrower;
 import application.util.Storage;
 import javafx.animation.Animation;
@@ -19,6 +20,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
 
@@ -64,6 +67,10 @@ public class QuizLayoutController extends BaseController {
 		this.school = school;
 		this.statistic = statistic;
 
+		while(this.statistic.getData().size() < quiz.getQuestions().size()) {
+			this.statistic.getData().add(new StatisticData());
+		}
+
 		baseOrder = new ArrayList<Integer>();
 		score = new ArrayList<Integer>();
 		
@@ -90,6 +97,11 @@ public class QuizLayoutController extends BaseController {
 		if (questionLayoutController.isAnswerCorrect()) {
 			Alert dialog = AlertThrower.createAlert("Correct!", 
 					"You are Correct!", null, "info");
+			ImageView icon = new ImageView(getClass().getResource("/img/check.png").toString());
+			icon.setFitHeight(50);
+			icon.setFitWidth(50);
+			dialog.setGraphic(icon);
+			stopTimer();
 			dialog.showAndWait();
 			
 			noteResult(2); // correct
@@ -99,6 +111,11 @@ public class QuizLayoutController extends BaseController {
 			Alert dialog = AlertThrower.createAlert("Incorrect!", 
 					"Oops! The Correct Answer is " + 
 					questionLayoutController.getCorrectAnswer(), null, "info");
+			ImageView icon = new ImageView(getClass().getResource("/img/cancel.png").toString());
+			icon.setFitHeight(50);
+			icon.setFitWidth(50);
+			dialog.setGraphic(icon);
+			stopTimer();
 			dialog.showAndWait();
 
 			noteResult(1); // incorrect
@@ -116,6 +133,11 @@ public class QuizLayoutController extends BaseController {
 			Alert dialog = AlertThrower.createAlert("That's Too Bad!", 
 					"The Correct Answer is " + 
 					questionLayoutController.getCorrectAnswer(), null, "info");
+			ImageView icon = new ImageView(getClass().getResource("/img/pass.png").toString());
+			icon.setFitHeight(50);
+			icon.setFitWidth(50);
+			dialog.setGraphic(icon);
+			stopTimer();
 			dialog.showAndWait();
 			
 			noteResult(0); // pass
@@ -168,6 +190,8 @@ public class QuizLayoutController extends BaseController {
 		}
 		
 		shuffleQuestions();
+		
+		stopTimer();
 
 		showQuestion();
 	}
@@ -255,7 +279,6 @@ public class QuizLayoutController extends BaseController {
 	}
 	
 	private void showSummary() {
-		stopTimer();
 		
 		int correct = 0;
 		int incorrect = 0;

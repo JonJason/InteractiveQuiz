@@ -434,6 +434,8 @@ public class AdminQuizTabController extends BaseController {
 						out.print(tab2 + "Question most often be given up\t\t\t: ");
 						out.println(questionList.get(hardQ).getText());
 					});
+					out.println();
+					out.println();
 				});
 
 	            out.close();

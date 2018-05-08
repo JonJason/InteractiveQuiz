@@ -59,6 +59,7 @@ public class QuizHomeController extends BaseController {
 	
 	@FXML
 	private void startQuiz(ActionEvent e) {
+		System.out.println("Yew");
 
 		ChoiceDialog<String> dialog = new ChoiceDialog<String>(
 				quiz.getSchools().get(0), quiz.getSchools());

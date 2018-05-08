@@ -43,8 +43,8 @@ public class QuizSummaryController extends BaseController {
 	}
 	
 	private void renderSummary() {
-		scoreLabel.setText("You got " + Integer.toString(Math.round(correct * 100 / total)) + "!");
-		resultLabel.setText(Integer.toString(Math.round(correct * 100 / total)));
+		scoreLabel.setText("You got " + Integer.toString(Math.round((float) correct * 100 / total)) + "%!");
+		resultLabel.setText(Integer.toString(Math.round((float) correct * 100 / total))+"%");
 		correctLabel.setText(Integer.toString(correct));
 		incorrectLabel.setText(Integer.toString(incorrect));
 		passedLabel.setText(Integer.toString(passed));
